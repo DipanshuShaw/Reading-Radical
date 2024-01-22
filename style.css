@@ -404,3 +404,63 @@ footer #social{
 .contact-sec-2 #button:hover{
     cursor: pointer;
 }
+
+
+/* reviewers styling */
+
+.reviewers-sec1{
+    background-image: url(Reading_radical_pics\reviewers-sec1-pic.jpg);
+    /* overflow: hidden */
+}
+
+.reviewers-sec1 img{
+    width: 100%;
+    margin-top: -363px;
+    margin-bottom: -200px;
+
+
+}
+
+.reviewers-sec1 #review-container{
+    position: relative;
+    top: 80px;
+    margin: 0;
+    color: #fff;
+    width: 35%;
+    margin: 0 8vw;
+}
+
+.reviewers-sec1 .review-head{
+    text-align: center;
+    font-family: 'Agbalumo', system-ui;
+    font-size: 40px;
+    font-weight: lighter;
+    margin: 0;
+    /* margin-bottom: 20px; */
+}
+
+.reviewers-sec1 .review-text{
+    font-size: 18px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: bold;
+}
+
+.reviewers-sec1 .review-button{
+    display: grid;
+    place-items: center;
+    margin: 30px;
+}
+
+.reviewers-sec1 button{
+    padding: 10px;
+    font-size: 24px;
+    border: 2px solid rgb(233, 2, 125);
+    background-color: transparent;
+    font-family: 'Agbalumo', system-ui;
+}
+
+.reviewers-sec1 button:hover{
+    background-color: rgb(233, 2, 125);
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
