@@ -139,6 +139,7 @@ footer{
     height: auto;
     margin: 0;
     padding: 0;
+    z-index: 1000;
 }
 
 
@@ -408,30 +409,28 @@ footer #social{
 
 /* reviewers styling */
 
-.reviewers-sec1{
+.review-sec1{
     background-image: url(Reading_radical_pics\reviewers-sec1-pic.jpg);
     /* overflow: hidden */
 }
 
-.reviewers-sec1 img{
+.review-sec1 img{
     width: 100%;
-    margin-top: -363px;
-    margin-bottom: -200px;
-
-
+    margin-top: -323px;
+    margin-bottom: -208px;
 }
 
-.reviewers-sec1 #review-container{
+.review-sec1 #review-container{
     position: relative;
-    top: 80px;
+    top: 120px;
     margin: 0;
     color: #fff;
     width: 35%;
     margin: 0 8vw;
 }
 
-.reviewers-sec1 .review-head{
-    text-align: center;
+.review-sec1 .review-head{
+    /* text-align: center; */
     font-family: 'Agbalumo', system-ui;
     font-size: 40px;
     font-weight: lighter;
@@ -439,19 +438,19 @@ footer #social{
     /* margin-bottom: 20px; */
 }
 
-.reviewers-sec1 .review-text{
-    font-size: 18px;
+.review-sec1 .review-text{
+    font-size: 16px;
     font-family: 'Chakra Petch', sans-serif;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
-.reviewers-sec1 .review-button{
+.review-sec1 .review-button{
     display: grid;
     place-items: center;
     margin: 30px;
 }
 
-.reviewers-sec1 button{
+.review-sec1 button{
     padding: 10px;
     font-size: 24px;
     border: 2px solid rgb(233, 2, 125);
@@ -459,7 +458,59 @@ footer #social{
     font-family: 'Agbalumo', system-ui;
 }
 
-.reviewers-sec1 button:hover{
+.review-sec1 button:hover{
+    background-color: rgb(233, 2, 125);
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.review-sec2 img{
+    width: 100%;
+    margin-top: -323px;
+    margin-bottom: -4px;
+    z-index: 10;
+
+}
+
+.review-sec2 #review-container{
+    position: relative;
+    top: 350px;
+    margin: 0;
+    color: #000000;
+    width: 35%;
+    margin: 0 8vw;
+}
+
+.review-sec2 .review-head{
+    /* text-align: center; */
+    font-family: 'Agbalumo', system-ui;
+    font-size: 40px;
+    font-weight: lighter;
+    margin: 0;
+    /* margin-bottom: 20px; */
+}
+
+.review-sec2 .review-text{
+    font-size: 16px;
+    font-family: 'Chakra Petch', sans-serif;
+    /* font-weight: bold; */
+}
+
+.review-sec2 .review-button{
+    display: grid;
+    place-items: center;
+    margin: 30px;
+}
+
+.review-sec2 button{
+    padding: 10px;
+    font-size: 24px;
+    border: 2px solid rgb(233, 2, 125);
+    background-color: transparent;
+    font-family: 'Agbalumo', system-ui;
+}
+
+.review-sec2 button:hover{
     background-color: rgb(233, 2, 125);
     color: white;
     transition: all 0.5s ease-in-out;
