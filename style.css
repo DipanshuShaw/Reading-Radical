@@ -1,0 +1,406 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: beige;
+}
+
+header{
+    color: aliceblue;
+    background-color: rgb(37, 37, 37);
+    margin: 0;
+    padding: 0;
+}
+
+header .logo{
+    display: inline-block;
+    position: absolute;
+    left: 36px;
+    /* border: 2px solid green; */
+}
+
+header .logo img{
+    width: 96px;
+}
+
+header .text{
+    display: inline-block;
+}
+
+header .heading{
+    width: 33%;
+    /* left: 10px; */
+    display: flex;
+    font-size: xx-large;
+    margin: 0px auto;
+    /* border: 2px solid red; */
+    font-family: 'Agbalumo', system-ui;
+    text-align: center;
+}
+
+header .heading span{
+    color: rgb(233, 2, 125);
+    font-size: 54px;
+    font-family: 'Agbalumo', system-ui;
+    
+}
+
+header .button{
+    /* display: inline-block; */
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    padding: 5px;
+    /* border: 2px solid green; */
+}
+
+header button{
+    padding: 4px 10px;
+    margin: 0px 14px;
+    background-color: transparent;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: bold;
+}
+
+header #login{
+    border: 1px solid rgb(255, 0, 0);
+    color: rgb(255, 0, 0);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+header #login:hover{
+    border: 1px solid rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+    transition: all 0.5s ease-in-out;
+}
+header #register{
+    border: 1px solid rgb(0, 132, 255);
+    color: rgb(0, 132, 255);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+header #register:hover{
+    background-color: rgb(0, 132, 255);
+    transition: all 0.5s ease-in-out;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 132, 255);
+}
+
+nav{
+    background-color: rgb(233, 2, 125);
+}
+
+nav ul{
+    display: flex;
+    /* justify-content: space-evenly; */
+    width: 50%;
+    max-width: 50%;
+    margin: 0px auto;
+    padding: 0;
+    /* border: 1px solid blue; */
+}
+
+nav li{
+    list-style: none;
+    padding: 10px 34px;
+    border-radius: 20px;
+}
+
+nav li:hover{
+    /* border: 1px solid rgb(255, 255, 255); */
+    background-color: rgb(255, 255, 255);
+    transition: all 0.4s;
+}
+
+nav li:hover a{
+    color: rgb(233, 2, 125);
+    transition: 0.4s ease-in-out;
+}
+
+nav li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#example{
+    height: 1000px;
+    width: 100%;
+    margin: 0;
+}
+footer{
+    background-color: rgb(37, 37, 37);
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+
+footer ul{
+    margin: 15px 20px;
+    color: rgb(233, 2, 125);
+    font-size: 24px;
+    display: inline-block;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: bold;
+}
+
+footer li{
+    list-style: none;
+    
+}
+
+footer li a{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+footer .footer-about{
+    display: inline-block;
+    margin: 20px 130px;
+    margin-top: 0;
+}
+
+footer h1{
+    text-align: center;
+    font-size: xx-large;
+    margin: 0px auto;
+    font-family: 'Agbalumo', system-ui;
+    color: white;
+}
+
+footer h1 span{
+    color: rgb(233, 2, 125);
+    font-size: 54px;
+    font-family: 'Agbalumo', system-ui;
+}
+
+footer .about-text{
+    font-size: 16px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+footer .footer-contact{
+    display: inline-block;
+    margin: 0px 20px 20px 0px;
+}
+
+footer .about-text span{
+    font-size: 20px;
+    color: rgb(233, 2, 125);
+}
+
+footer #social{
+    display: flex;
+    width: 20%;
+    margin: 0px auto;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+#social i{
+    font-size: 30px;
+}
+
+
+/* Home styling */
+
+
+.sec1 img{
+    width: 100%;
+    margin-bottom: -4px;
+}
+
+.sec1 #home-sec1{
+    display: inline-block;
+    width: 39%;
+    margin: 0 auto;
+    position:absolute;
+    top: 240px;
+    right: 120px;
+}
+.sec1 #sec1-quote{
+    color: rgb(40, 40, 40);
+    font-size: 32px;
+    font-family: 'Agbalumo', system-ui;
+    /* text-align: center; */
+}
+
+.sec1 #sec1-text{
+    color: rgb(40, 40, 40);
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: sans-serif;
+    display: flex;
+    text-align: center;
+}
+
+.sec1 #sec1-button{
+    display: grid;
+    place-items: center;
+    margin: 30px;
+}
+.sec1 button{
+    padding: 10px;
+    font-size: 24px;
+    border: 2px solid rgb(233, 2, 125);
+    background-color: transparent;
+    font-family: 'Agbalumo', system-ui;
+}
+
+.sec1 button:hover{
+    background-color: rgb(233, 2, 125);
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.sec2{
+    padding: 20px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sec2 .container{
+    width: 25%;
+    height: 300px;
+    max-height: 300px;
+    display: inline-block;
+    padding: 16px;
+    font-size: 18px;
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: rgb(250, 130, 194);
+    border-radius: 20px;
+    color: rgb(39, 39, 39);
+    text-align: center;
+    font-weight: bold;
+}
+
+.sec2 .container div{
+    font-family: 'Agbalumo', system-ui;
+    font-size: 26px;
+    color: black;
+    margin-bottom: 36px ;
+    font-weight: normal;
+}
+
+.sec2 .container:hover{
+    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.6s ease-in-out;
+}
+
+
+/* About styling */
+
+.about-container{
+    margin: 20px;
+    padding: 20px;
+    font-size: 24px;
+    font-family: cursive;
+    display: flex;
+    align-items: center;
+}
+
+.about-container-text{
+    display: inline-block;
+    /* align-items: center; */
+    width: 60%;
+    padding: 10px;
+    margin: 0 20px;
+    /* height: 250px; */
+    /* align-items: center; */
+
+}
+
+.about-container-text span{
+    color: rgb(233, 2, 125);
+    font-weight: bold;
+}
+
+.about-container img{
+    width: 30%;
+    height: 250px;
+}
+
+
+/* Contact styling */
+
+.contact-head{
+    text-align: center;
+    background-color: bisque;
+    margin: 0;
+    padding: 40px 0;
+    font-size: 48px;
+}
+
+.contact-sec-1{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: bisque;
+}
+
+.contact-container{
+    display: inline-block;
+    width: 25%;
+    /* margin: 0px auto; */
+    text-align: center;
+    font-size: 19px;
+    margin-bottom: 20px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: bold;
+}
+
+.contact-container h1{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.contact-container h1 i{
+    font-size: 80px;
+    color: rgb(250, 130, 194);
+}
+
+.contact-sec-1 a{
+    /* text-decoration: none; */
+    color: black;
+}
+
+#contact-container-4{
+    width: 33%;
+    margin: 30px auto;
+    height: 40vh;
+    text-align: center;
+    padding: 10px;
+}
+
+.contact-sec-2 .input{
+    /* height: 32px; */
+    width: 75%;
+    border: 1px solid black;
+    padding: 5px 30px 5px 30px;
+    margin: 10px;
+    border-radius: 25px;
+    background-color: white;
+    font-size: large;
+}
+
+.contact-sec-2 #button{
+    height: 40px;
+    background-color: rgb(233, 2, 125);
+    color: #fff;
+    font-size: larger;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.contact-sec-2 #button:hover{
+    cursor: pointer;
+}
