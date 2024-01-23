@@ -520,3 +520,71 @@ footer #social{
     color: white;
     transition: all 0.5s ease-in-out;
 }
+
+
+
+/* Explore Styling */
+
+.explore-nav{
+    background-color: beige;
+
+}
+
+.explore-nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    float: left;
+    margin: 0 auto;
+    padding: 0;
+    /* border: 1px solid blue; */
+    width: 100%;
+    max-width: 100%;
+
+}
+
+.explore-nav li{
+    list-style: none;
+    padding: 10px 34px;
+    border-radius: 20px;
+}
+
+.explore-nav li:hover{
+    /* border: 1px solid rgb(255, 255, 255); */
+    background-color: rgb(37, 37, 37);
+    transition: all 0.4s;
+    border-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+}
+
+.explore-nav li:hover button{
+    color: rgb(233, 2, 125);
+    transition: 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+.explore-nav li button{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-family: sans-serif;
+    font-size: 20px;
+    /* font-weight: bold; */
+    border: none;
+    background-color: transparent;
+}
+
+.explore-nav input{
+    width: 20%;
+    height: 45px;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 18px;
+    padding-left: 16px;
+    border-radius: 20px;
+}
+
+.explore-nav i{
+    position: relative;
+    top: 15px;
+    right: 48px;
+}
