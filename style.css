@@ -361,6 +361,11 @@ footer #social{
     font-weight: bold;
 }
 
+.contact-container:hover{
+    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.6s ease-in-out;
+}
+
 .contact-container h1{
     margin-bottom: 20px;
     margin-top: 20px;
