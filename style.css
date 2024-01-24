@@ -139,7 +139,10 @@ footer{
     height: auto;
     margin: 0;
     padding: 0;
-    z-index: 1000;
+    /* z-index: 1000; */
+    /* position: ; */
+    /* display: flex; */
+    /* bottom: 0px; */
 }
 
 
@@ -414,10 +417,10 @@ footer #social{
 
 /* reviewers styling */
 
-.review-sec1{
+/* .review-sec1{
     background-image: url(Reading_radical_pics\reviewers-sec1-pic.jpg);
-    /* overflow: hidden */
-}
+    overflow: hidden
+} */
 
 .review-sec1 img{
     width: 100%;
@@ -473,7 +476,7 @@ footer #social{
     width: 100%;
     margin-top: -323px;
     margin-bottom: -4px;
-    z-index: 10;
+    /* z-index: 10; */
 
 }
 
@@ -587,4 +590,54 @@ footer #social{
     position: relative;
     top: 15px;
     right: 48px;
+}
+
+.explore-All{
+    width: 100%;
+    height: 100%;
+    /* padding: 10; */
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.explore-box{
+    width: 320px;
+    margin: 16px;
+    padding: 2px;
+    /* height: 500px; */
+    background-color: rgb(211, 211, 179);
+    font-size: 24px;
+    font-family: 'Agbalumo', system-ui;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+
+.explore-box img{
+    width: 90%;
+    /* display: block; */
+    margin: 15px;
+    /* margin-top: 5px; */
+    margin-bottom: -4px;
+    border-radius: 20px;
+}
+
+.explore-box .explore-box-button{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.explore-box button{
+    padding: 6px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    border: 2px solid rgb(233, 2, 125);
+    background-color: transparent;
+    font-family: 'Agbalumo', system-ui;
+}
+
+.explore-box button:hover{
+    background-color: rgb(233, 2, 125);
+    color: white;
+    transition: all 0.5s ease-in-out;
 }
