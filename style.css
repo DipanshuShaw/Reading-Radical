@@ -592,25 +592,31 @@ footer #social{
     right: 48px;
 }
 
-.explore-All{
+.explore-Motivational, .explore-Action, .explore-Romantic{
     width: 100%;
     height: 100%;
     /* padding: 10; */
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 .explore-box{
     width: 320px;
     margin: 16px;
-    padding: 2px;
+    /* padding: 2px; */
     /* height: 500px; */
     background-color: rgb(211, 211, 179);
     font-size: 24px;
     font-family: 'Agbalumo', system-ui;
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     border-radius: 20px;
+}
+
+.explore-box p{
+    margin: 0 10px;
 }
 
 .explore-box img{
@@ -620,6 +626,7 @@ footer #social{
     /* margin-top: 5px; */
     margin-bottom: -4px;
     border-radius: 20px;
+    border: 1px solid black;
 }
 
 .explore-box .explore-box-button{
@@ -641,3 +648,8 @@ footer #social{
     color: white;
     transition: all 0.5s ease-in-out;
 }
+
+#explore-box0 img{
+    height: 75%;
+}
+
