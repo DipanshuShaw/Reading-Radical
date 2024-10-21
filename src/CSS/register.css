@@ -1,0 +1,97 @@
+* {box-sizing: border-box}
+
+/* Add padding to containers */
+
+.registerBody{
+    background-image: url('../Images/reviewers-sec2-pic.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+}
+
+.container {
+  padding: 16px;
+  background-color: rgba(0,0,0,0.5);
+    color: rgb(255, 255, 255);
+    border-radius: 40px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Full-width input fields */
+.registerBody input[type=text],.registerBody input[type=password],.registerBody input[type=username] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  color: rgb(130, 130, 130);
+}
+
+.registerBody input[type=text]:focus,.registerBody input[type=password]:focus,.registerBody input[type=username]:focus {
+  background-color: #ddd;
+  outline: none;
+  color: black;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {    
+    border-radius: 40px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+form {
+    margin-top: 2rem;
+}
+
+.registerBody form input[type="text"], input[type="email"],.registerBody input[type="password"],.registerBody input[type=username] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form .button[type="submit"] {
+    background-color: #d90080;
+    color: #fff;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button[type="submit"]:hover {
+    background-color: #c4007a;
+}

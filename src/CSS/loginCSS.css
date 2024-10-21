@@ -1,0 +1,78 @@
+.loginBody {
+    background-image: url("../Images/reviewers-sec1-pic.jpg");
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 120px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bodylogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.boxlogin{
+    height: 500px;
+    width: 500px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    opacity: 1;
+    align-items: center;
+    display: block;
+    justify-content: center;
+    padding: 30px;
+}
+h3 {
+    font-size: 54px;
+    display: block;
+    color: aliceblue;
+    margin: 20px;
+
+}
+.h3{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.input{
+    height: 40px;
+    width: 100vh;
+    border: 1px solid black;
+    padding: 5px 30px 5px 30px;
+    margin: 10px;
+    border-radius: 25px;
+    background-color: white;
+    font-size: large;
+    color: black;
+}
+.checkbox{
+    font-size: large;
+}
+#button{
+    height: 40px;
+    background-color: rgb(129, 184, 223);
+    color: #fff;
+    font-size: larger;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#button:hover{
+    cursor: pointer;
+}
+#register{
+    font-size: large;
+}
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
