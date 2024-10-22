@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import Template from './Template';
 
 const Explore = () => {
 
@@ -24,6 +25,7 @@ const Explore = () => {
           {/* <input type="search" name="" id="" placeholder="Search" /> */}
         </ul>
       </nav>
+      <Template/>
       <Outlet />
     </>
   )
