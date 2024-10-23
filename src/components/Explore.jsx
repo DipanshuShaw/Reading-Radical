@@ -25,7 +25,7 @@ const Explore = () => {
           {/* <input type="search" name="" id="" placeholder="Search" /> */}
         </ul>
       </nav>
-      {/* <Template/> */}
+      <Template/>
       <Outlet />
     </>
   )
