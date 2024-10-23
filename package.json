@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ],
   "name": "reading-radical",
   "private": true,
   "version": "0.0.0",
