@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
 const Detective = () => {
   return (
     <>
-          <section class="explore-Detective">
+          <section className="explore-Detective">
           Detective
           </section>
     </>

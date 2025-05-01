@@ -1,11 +1,22 @@
-import React from 'react'
-import Template from '../Template'
-
+// import React from 'react'
+// import Template from '../Template'
+import Comics from './Comics'
+import Action from './Action'
+import Detective from './Detective'
+import Scifi from './Scifi'
+import Motivational from './Motivational'
+import Romantic from './Romantic'
 const All = () => {
     return (
         <>
-            <section class="explore-all">
-                <Template/>
+            <section className="">
+                <Comics/>
+                <Romantic/>
+                <Action/>
+                <Detective/>
+                <Scifi/>
+                <Motivational/>
+
             </section>
         </>
     )

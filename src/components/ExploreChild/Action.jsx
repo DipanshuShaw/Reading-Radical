@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
 const Action = () => {
   return (
     <>
-          <section class="explore-Action">
+          <section className="explore-Action">
           Action
           </section>
         

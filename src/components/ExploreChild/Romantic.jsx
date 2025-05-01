@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
 const Romantic = () => {
   return (
     <>
-      <section class="explore-Romantic">
+      <section className="explore-Romantic">
       Romantic
       </section>
       </>

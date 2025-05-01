@@ -1,31 +1,62 @@
-import React from 'react'
-import '../CSS/loginCSS.css'
-import {
-  Link
-} from "react-router-dom";
-
-
+// import { LogInIcon } from 'lucide-react'
+// import React from 'react'
+import { Link } from 'react-router-dom'
+import loginImage from "../Images/reviewers-sec1-pic.jpg";
 
 const Login = () => {
-    const styleHead={paddingBottom: '5px', borderBottom: '4px solid white'}
   return (
-    <div className='loginBody'>
-      <form className="bodylogin" method="post" action="/login">
-            <div className="boxlogin">
-                <div class = "h3" align="center"  style={styleHead}><h3>LOGIN</h3></div>
-                <br/>
-                <div className="h3"><input type="Username" placeholder="Username" className="input" name="username"/></div>
-                <br/>
-                <div className="h3"><input type="Password" placeholder="Password" className="input" name="password"/></div>
-                <br/>
-                <div className="checkbox"><input type="checkbox" name="" id=""/>Remember Me</div>
-                <div>
-                    <div className="button"><Link type="submit" className="input" id="button" to='/'>LOGIN</Link></div>
-                </div>
-                <br/>
-                <div className="h3"><Link to="../register" id="register">New User? Register</Link></div>
-            </div>
-        </form>
+<div
+  className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
+  style={{ backgroundImage: `url(${loginImage})` }}
+>
+
+      <form
+        method="post"
+        action="/login"
+        className="w-full text-white max-w-sm bg-black  bg-opacity-40 p-6 rounded-lg shadow-lg"
+      >
+        <div className="text-center border-b-4 border-white pb-2 mb-4">
+          <h3 className="text-xl font-bold">LOGIN</h3>
+        </div>
+
+        <div className="mb-4 text-white">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            className="w-full px-4 py-2 border border-gray-300 text-white bg-amber-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div className="mb-4">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="w-full px-4 py-2 border border-gray-300 bg-amber-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div className="flex items-center mb-4">
+          <input type="checkbox" id="remember" className="mr-2" />
+          <label htmlFor="remember" className="text-sm  text-white">Remember Me</label>
+        </div>
+
+        <div className="mb-4">
+          <Link
+            to="/"
+            className="block w-full text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            LOGIN
+          </Link>
+        </div>
+
+        <div className="text-center">
+          <Link to="../register" className="text-blue-600 hover:underline">
+            New User? Register
+          </Link>
+        </div>
+      </form>
     </div>
   )
 }
