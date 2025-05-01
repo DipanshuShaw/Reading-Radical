@@ -3,7 +3,7 @@ import secImg1 from '../Images/home-sec1.jpg'
 
 const Home = () => {
   return (
-    <div>
+    <div id='/home'>
       <section className="sec1">
         <div id="home-sec1">
             <div className="font1 text-2xl lg:text-3xl ">

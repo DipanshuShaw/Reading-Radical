@@ -33,6 +33,15 @@ function App() {
         <Home/>
         <Footer/>
       </>
+    },    {
+      path: "/home",
+      element: 
+      <>
+        <Header/>
+        <Navbar/>
+        <Home/>
+        <Footer/>
+      </>
     },
     {
       
