@@ -16,10 +16,13 @@ import Explore from './components/Explore'
 import Motivational from './components/ExploreChild/Motivational'
 import Action from './components/ExploreChild/Action'
 import Scifi from './components/ExploreChild/Scifi'
-import Comics from './components/ExploreChild/Comics'
 import Romantic from './components/ExploreChild/Romantic'
 import Detective from './components/ExploreChild/Detective'
 import All from './components/ExploreChild/All'
+import Horror from './components/ExploreChild/Horror'
+import Fantasy from './components/ExploreChild/Fantasy'
+import ReadReview from './components/ReadReview'
+
 
 function App() {
 
@@ -75,6 +78,16 @@ function App() {
       </>
     },
     {
+      path: "/books/:id/reviews",
+      element: 
+      <>
+        <Header />
+        <Navbar />
+        <ReadReview />
+        <Footer />
+      </>
+    },
+    {
       path: "/explore",
       element: 
       <>
@@ -120,10 +133,10 @@ function App() {
           </>
         },
         {
-          path: "comics",
+          path: "fantasy",
           element: 
           <>
-            <Comics/>
+            <Fantasy/>
           </>
         },
         {
@@ -131,6 +144,13 @@ function App() {
           element: 
           <>
             <Detective/>
+          </>
+        },
+        {
+          path: "horror",
+          element: 
+          <>
+            <Horror/>
           </>
         },
       ]

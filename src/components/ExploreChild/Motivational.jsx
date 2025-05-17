@@ -1,12 +1,10 @@
-// import React from 'react'
+import React from 'react'
 
 const Motivational = () => {
   return (
-    <>
-      <section className="explore-Motivational">
-        Motivational
-      </section>
-    </>
+    <div>
+      Motivational
+    </div>
   )
 }
 

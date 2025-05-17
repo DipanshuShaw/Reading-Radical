@@ -1,13 +1,10 @@
-// import React from 'react'
+import React from 'react'
 
 const Action = () => {
   return (
-    <>
-          <section className="explore-Action">
-          Action
-          </section>
-        
-    </>
+    <div>
+      Action
+    </div>
   )
 }
 

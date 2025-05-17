@@ -1,12 +1,10 @@
-// import React from 'react'
+import React from 'react'
 
 const Romantic = () => {
   return (
-    <>
-      <section className="explore-Romantic">
+    <div>
       Romantic
-      </section>
-      </>
+    </div>
   )
 }
 

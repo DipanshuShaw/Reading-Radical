@@ -864,18 +864,6 @@
             "genre": "Comics"
         },
         {
-            "key": 74,
-            "author": "Juan Rulfo",
-            "country": "Mexico",
-            "imageLink": "../../public/bookImages/pedro-paramo.jpg",
-            "language": "Spanish",
-            "link": "https://en.wikipedia.org/wiki/Pedro_P%C3%A1ramo",
-            "pages": 124,
-            "title": "Pedro Páramo",
-            "year": 1955,
-            "genre": "Action"
-        },
-        {
             "key": 75,
             "author": "Rumi",
             "country": "Sultanate of Rum",
@@ -886,18 +874,6 @@
             "title": "The Masnavi",
             "year": 1236,
             "genre": "Motivational"
-        },
-        {
-            "key": 76,
-            "author": "Salman Rushdie",
-            "country": "United Kingdom, India",
-            "imageLink": "../../public/bookImages/midnights-children.jpg",
-            "language": "English",
-            "link": "https://en.wikipedia.org/wiki/Midnight%27s_Children",
-            "pages": 536,
-            "title": "Midnight's Children",
-            "year": 1981,
-            "genre": "Action"
         },
         {
             "key": 77,
@@ -934,17 +910,5 @@
             "title": "Blindness",
             "year": 1995,
             "genre": "Sci-Fi"
-        },
-        {
-            "key": 80,
-            "author": "William Shakespeare",
-            "country": "England",
-            "imageLink": "../../public/bookImages/hamlet.jpg",
-            "language": "English",
-            "link": "https://en.wikipedia.org/wiki/Hamlet",
-            "pages": 432,
-            "title": "Hamlet",
-            "year": 1603,
-            "genre": "Action"
         }
     ]

@@ -52,8 +52,13 @@ const Explore = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/explore/comics" className={({ isActive }) => getLinkClass('/explore/comics', isActive)}>
-                Comics
+              <NavLink to="/explore/fantasy" className={({ isActive }) => getLinkClass('/explore/fantasy', isActive)}>
+                Fantasy
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/explore/horror" className={({ isActive }) => getLinkClass('/explore/horror', isActive)}>
+                Horror
               </NavLink>
             </li>
           </ul>

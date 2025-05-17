@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Scifi = () => {
+const Horror = () => {
   return (
     <div>
-      Scifi
+      Horror
     </div>
   )
 }
 
-export default Scifi
+export default Horror
