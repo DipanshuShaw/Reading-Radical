@@ -1,10 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
 const Horror = () => {
   return (
-    <div>
-      Horror
-    </div>
+    <>
+          <section className="explore-Comics">
+          Horror
+          </section>
+    </>
   )
 }
 

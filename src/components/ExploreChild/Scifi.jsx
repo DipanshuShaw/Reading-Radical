@@ -1,10 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
 const Scifi = () => {
   return (
-    <div>
-      Scifi
-    </div>
+    <>
+            <section className="explore-Scifi">
+            Scifi
+      </section>
+    </>
   )
 }
 

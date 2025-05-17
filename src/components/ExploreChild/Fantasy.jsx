@@ -1,10 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
 const Fantasy = () => {
   return (
-    <div>
-      Fantasy
-    </div>
+    <>
+          <section className="explore-Comics">
+          Fantasy
+          </section>
+    </>
   )
 }
 

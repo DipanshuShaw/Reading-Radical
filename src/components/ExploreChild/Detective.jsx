@@ -1,10 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
 const Detective = () => {
   return (
-    <div>
-      Detective
-    </div>
+    <>
+          <section className="explore-Detective">
+          Detective
+          </section>
+    </>
   )
 }
 

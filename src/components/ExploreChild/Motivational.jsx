@@ -1,10 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
 const Motivational = () => {
   return (
-    <div>
-      Motivational
-    </div>
+    <>
+      <section className="explore-Motivational">
+        Motivational
+      </section>
+    </>
   )
 }
 
