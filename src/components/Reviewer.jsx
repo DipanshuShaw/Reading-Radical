@@ -1,8 +1,21 @@
 // import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import secImg1 from '../Images/reviewers-sec1-pic.jpg'
 import secImg2 from '../Images/reviewers-sec2-pic.jpg'
 
 const Reviewer = () => {
+
+  const navigate = useNavigate();
+
+  const register = () => {
+    navigate(`/login`);
+  };
+
+  const handleWriteReview = () => {
+    navigate(`/explore/all`);
+  };
+
+
   return (
     <>
       {/* Section 1 */}
@@ -18,7 +31,7 @@ const Reviewer = () => {
             Embrace your love for books and become a vital part of our literary community! Share your unique
             perspective by writing book reviews on our website. Whether you&apos;re a seasoned critic or a casual reader, your opinions matter.
           </p>
-          <button className="mt-6 bg-pink-600 hover:bg-pink-700 px-6 py-2 rounded text-white font-semibold">
+          <button className="mt-6 bg-pink-600 hover:bg-pink-700 px-6 py-2 rounded text-white font-semibold" onClick={register}>
             Become A Reviewer
           </button>
         </div>
@@ -36,7 +49,7 @@ const Reviewer = () => {
           <p className="text-base md:text-lg max-w-3xl">
             Passionate about books? Share your thoughts! Contribute to our book-loving community by writing a quick review for your favorite reads. Your insights help fellow bookworms discover new treasures.
           </p>
-          <button className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white font-semibold">
+          <button className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white font-semibold" onClick={handleWriteReview}>
             Write A Review
           </button>
         </div>

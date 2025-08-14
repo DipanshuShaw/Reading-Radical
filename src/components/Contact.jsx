@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -106,7 +106,7 @@ const Contact = () => {
             </div>
   
             <div>
-              <label className="block text-gray-700 mb-2">Rating:</label>
+              <label className="block text-gray-700 float-left mt-1.5 mr-4">Rating:</label>
               <div className="flex space-x-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
@@ -139,7 +139,7 @@ const Contact = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200"
+                className="bg-[#e9027d] text-white px-6 py-2 rounded-md hover:bg-[rgb(233,2,150)] transition duration-200"
               >
                 Submit
               </button>

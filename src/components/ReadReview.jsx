@@ -1,60 +1,76 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+// import Template from './template';/
+import Template2 from './Template2';
 
 const ReadReview = () => {
-  const { id } = useParams(); // Get book ID from URL
+  const { id } = useParams(); // book ID from URL
+  const [book, setBook] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchBookAndReviews = async () => {
       try {
-        // Fetch reviews for the book by ID
-        const response = await fetch(`http://localhost:5000/api/book/${id}/reviews`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch reviews');
-        }
-        const data = await response.json();
-        setReviews(data);
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-        setError(error.message); // Set error message
+        const [bookRes, reviewsRes] = await Promise.all([
+          fetch(`http://localhost:5000/api/books/${id}`),
+          fetch(`http://localhost:5000/api/book/${id}/reviews`)
+        ]);
+
+        if (!bookRes.ok) throw new Error('Failed to fetch book details');
+        if (!reviewsRes.ok) throw new Error('Failed to fetch reviews');
+
+        const bookData = await bookRes.json();
+        const reviewsData = await reviewsRes.json();
+
+        setBook(bookData);
+        setReviews(reviewsData);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchReviews();
+    fetchBookAndReviews();
   }, [id]);
 
-  if (loading) return <p className="text-center mt-8 text-xl text-gray-600">Loading reviews...</p>;
+  if (loading) return <p className="text-center mt-8 text-xl text-gray-600">Loading...</p>;
   if (error) return <p className="text-center mt-8 text-xl text-red-600">{error}</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-      <h1 className="text-3xl font-bold text-center text-indigo-700 mb-6">
-        Reviews for Book ID: {id}
-      </h1>
-      {reviews.length === 0 ? (
-        <p className="text-center text-lg text-gray-500">No reviews found for this book.</p>
-      ) : (
-        <ul className="space-y-6">
-          {reviews.map((review, index) => (
-            <li key={index} className="bg-gray-50 p-5 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition duration-300 ease-in-out">
-              <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0">
-                  <span className="text-indigo-600 font-semibold">{review.reviewer}</span>
+    <div className="mx-auto p-6 mt-10 rounded-lg shadow-md">
+      <div className="w-full mb-8">
+        <Template2 book={book} />
+      </div>
+
+      <h2 className="text-5xl font-bold border-b-4 border-indigo-700 text-indigo-700 mb-6 pb-4 text-center">Reviews</h2>
+      <div className="w-full">
+        {reviews.length === 0 ? (
+          <p className="text-center text-gray-500 text-lg">No reviews found for this book.</p>
+        ) : (
+          <ul className="gap-4 text-left grid grid-cols-2">
+            {reviews.map((review, index) => (
+              <li
+                key={index}
+                className="p-4 rounded"
+              >
+                <p className="text-black text-3xl font-medium">{review.reviewer}</p>
+                <div className="text-xl space-x-1 text-yellow-500">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <span key={i} className='text-2xl'>{i < review.rating ? '★' : '☆'}</span>
+                  ))}
+                  &nbsp;<span className='font-mono'> Rating - {review.rating}/5</span>
                 </div>
-                <div className="flex-grow">
-                  <p className="text-gray-700">{review.comment}</p>
-                  <p className="mt-2 text-yellow-500 font-semibold">Rating: {review.rating} / 5</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+                <p className="text-gray-800 mt-1">{review.comment}</p>
+              </li>
+            ))}
+          </ul>
+
+        )}
+      </div>
+
     </div>
   );
 };

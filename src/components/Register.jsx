@@ -12,7 +12,7 @@ const Register = () => {
 
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
+    name: '',
     password: '',
     is_reviewer: false,
   });
@@ -72,14 +72,14 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="username" className="block text-sm text-white font-medium mb-1">
+          <label htmlFor="name" className="block text-sm text-white font-medium mb-1">
             Username
           </label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             placeholder="Username"
             required

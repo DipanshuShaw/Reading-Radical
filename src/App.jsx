@@ -17,11 +17,16 @@ import Motivational from './components/ExploreChild/Motivational'
 import Action from './components/ExploreChild/Action'
 import Scifi from './components/ExploreChild/Scifi'
 import Romantic from './components/ExploreChild/Romantic'
-import Detective from './components/ExploreChild/Detective'
+// import Detective from './components/ExploreChild/Detective'
 import All from './components/ExploreChild/All'
 import Horror from './components/ExploreChild/Horror'
 import Fantasy from './components/ExploreChild/Fantasy'
 import ReadReview from './components/ReadReview'
+import Comedy from './components/ExploreChild/Comedy'
+import WriteReview from './components/WriteReview.jsx';
+
+{/* <Route path="/books/:id/write-review" element={<WriteReview />} /> */}
+
 
 
 function App() {
@@ -88,6 +93,16 @@ function App() {
       </>
     },
     {
+      path: "/books/:id/write-review",
+      element: 
+      <>
+        <Header />
+        <Navbar />
+        <WriteReview />
+        <Footer />
+      </>
+    },
+    {
       path: "/explore",
       element: 
       <>
@@ -140,10 +155,10 @@ function App() {
           </>
         },
         {
-          path: "detective",
+          path: "comedy",
           element: 
           <>
-            <Detective/>
+            <Comedy/>
           </>
         },
         {

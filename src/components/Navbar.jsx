@@ -10,16 +10,53 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Desktop Menu */}
-                    <ul className="hidden md:flex flex-grow justify-center space-x-6">
-                        {["Home", "About Us", "Explore", "Reviewer", "Contact"].map((item, index) => (
-                            <li key={index} className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-                                <Link to={`/${item.toLowerCase().replace(/\s+/g, '')}`} 
-                                    className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300">
-                                    {item}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+<ul className="hidden md:flex flex-grow justify-center space-x-6">
+  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
+    <Link
+      to="/home"
+      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
+    >
+      Home
+    </Link>
+  </li>
+
+  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
+    <Link
+      to="/aboutus"
+      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
+    >
+      About Us
+    </Link>
+  </li>
+
+  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
+    <Link
+      to="/explore/all"
+      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
+    >
+      Explore
+    </Link>
+  </li>
+
+  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
+    <Link
+      to="/reviewer"
+      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
+    >
+      Reviewer
+    </Link>
+  </li>
+
+  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
+    <Link
+      to="/contact"
+      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
+    >
+      Contact
+    </Link>
+  </li>
+</ul>
+
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden">

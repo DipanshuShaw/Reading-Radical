@@ -1,7 +1,16 @@
 // import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import secImg1 from '../Images/home-sec1.jpg'
 
 const Home = () => {
+
+const navigate = useNavigate();
+
+const toExplore =()=>{
+    navigate('/explore/all');
+}
+
+
   return (
     <div id='/home'>
       <section className="sec1">
@@ -13,7 +22,7 @@ const Home = () => {
                 Step into a world of words where every page holds a new adventure. Welcome to Reading Radical page, where stories come to life through the magic of shared experiences. Let the exploration begin!
             </div>
             <div id="sec1-button">
-                <button type="submit">Explore Now</button>
+                <button type="button" onClick={toExplore}>Explore Now</button>
             </div>
         </div>
         <img src={secImg1} alt=""/>

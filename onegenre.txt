@@ -1,0 +1,122 @@
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('The Bourne Identity', 'Robert Ludlum', 'A man with amnesia discovers he’s part of a covert operation.', 'https://m.media-amazon.com/images/I/81m09J3vSlL._UF1000,No image available', 'Action'),
+
+('Jack Reacher: Killing Floor', 'Lee Child', 'An ex-military cop walks into a town and uncovers a criminal conspiracy.', 'https://m.media-amazon.http://books.google.com/books/content?id=6bPlAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Action'),
+
+('The Hunger Games', 'Suzanne Collins', 'A girl must survive a deadly televised competition.', 'https://m.media-amazon.com/images/I/61I24wOsn8L._AC_UF1000,No image available', 'Action'),
+
+('The Maze Runner', 'James Dashner', 'A boy wakes up in a mysterious maze with no memory.', 'https://images1.penguinrandomhouse.com/cover/9780399566547', 'Action'),
+
+('John Wick', 'Derek Kolstad', 'A retired hitman seeks revenge for the killing of his dog.', 'https://www.hollywoodreporter.http://books.google.com/books/content?id=oa_SDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api?w=1047&h=1126&crop=1', 'Action'),
+
+('Mission: Impossible – Rogue Nation', 'Christopher McQuarrie', 'Ethan Hunt uncovers a secret organization trying to destroy the IMF.', 'https://fr.web.img3.acsta.No information found', 'Action'),
+
+('Mad Max: Fury Road', 'George Miller', 'In a desert wasteland, Max helps a woman rebel against a tyrant.', 'http://books.google.com/books/content?id=3uMoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Action'),
+
+('Skyfall', 'Sam Mendes', 'James Bond faces a former agent seeking revenge on MI6.', 'https://i0.wp.com/heyuguys.co.http://books.google.com/books/content?id=egUrQAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Action'),
+
+('Die Hard: Year One', 'Howard Chaykin', 'John McClane’s early adventures as a New York City cop.', 'https://movingpicturereview.No information found?w=878', 'Action'),
+
+('Red Sparrow', 'Jason Matthews', 'A Russian spy must navigate deception and survival.', 'https://m.media-amazon.com/images/I/71TCF4djsPL._UF1000,No image available', 'Action');
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 'Timeless principles of personal and professional effectiveness.', 'http://books.google.com/books/content?id=hENIewAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Motivational'),
+
+('Awaken the Giant Within', 'Tony Robbins', 'Take control of your emotions, finances, relationships, and life.', 'http://books.google.com/books/content?id=_J3NBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('You Can Win', 'Shiv Khera', 'Success principles to build a positive attitude and self-confidence.', 'http://books.google.com/books/content?id=aQhbEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Motivational'),
+
+('The Power of Positive Thinking', 'Norman Vincent Peale', 'The foundation of positive thinking and faith in action.', 'http://books.google.com/books/content?id=8afREAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('Start With Why', 'Simon Sinek', 'Inspire people by focusing on the purpose behind your actions.', 'http://books.google.com/books/content?id=vxcrDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('Think and Grow Rich', 'Napoleon Hill', 'Classic motivational book on achieving success through mindset.', 'http://books.google.com/books/content?id=rxv44Ok-PJYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('The Subtle Art of Not Giving a F*ck', 'Mark Manson', 'A counterintuitive approach to living a good life.', 'http://books.google.com/books/content?id=W8bJ0AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Motivational'),
+
+('Make Your Bed', 'Admiral William H. McRaven', 'Simple things that can change your life and maybe the world.', 'http://books.google.com/books/content?id=QOPkDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('Can’t Hurt Me', 'David Goggins', 'From a broken childhood to becoming a Navy SEAL and ultra-athlete.', 'http://books.google.com/books/content?id=IeYmEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Motivational'),
+
+('Atomic Habits', 'James Clear', 'An easy and proven way to build good habits and break bad ones.', 'No image available', 'Motivational');
+
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('Good Omens', 'Neil Gaiman & Terry Pratchett', 'An angel and a demon team up to stop the apocalypse.', 'http://books.google.com/books/content?id=B7FL6zzN_FsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('Bossypants', 'Tina Fey', 'A hilarious memoir by comedian Tina Fey.', 'http://books.google.com/books/content?id=2WQBMnXue5IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('The Hitchhiker’s Guide to the Galaxy', 'Douglas Adams', 'An Earthman is swept into absurd adventures in space.', 'http://books.google.com/books/content?id=dczPamLCmI4C&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Comedy'),
+('Is Everyone Hanging Out Without Me?', 'Mindy Kaling', 'Funny essays from the writer and actress.', 'http://books.google.com/books/content?id=9O2-CQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('My Sister the Serial Killer', 'Oyinkan Braithwaite', 'A darkly comic story of a woman cleaning up her sister’s messes.', 'http://books.google.com/books/content?id=tpZcDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('Diary of a Wimpy Kid', 'Jeff Kinney', 'A middle schooler hilariously navigates school life.', 'http://books.google.com/books/content?id=J0KuzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Comedy'),
+('Catch-22', 'Joseph Heller', 'A satirical novel about the absurdity of war.', 'No image available', 'Comedy'),
+('Hyperbole and a Half', 'Allie Brosh', 'Funny illustrated stories about life and depression.', 'http://books.google.com/books/content?id=gXtbEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('Bridget Jones’s Diary', 'Helen Fielding', 'A modern woman navigates dating and life with wit.', 'http://books.google.com/books/content?id=Rx25Lwlyr5UC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy'),
+('The 100-Year-Old Man Who Climbed Out the Window and Disappeared', 'Jonas Jonasson', 'An old man escapes his nursing home for an unexpected adventure.', 'http://books.google.com/books/content?id=9bH4CQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Comedy');
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('Dune', 'Frank Herbert', 'A young nobleman rises to power on a desert planet with valuable spice.', 'http://books.google.com/books/content?id=hOy3EAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Ender’s Game', 'Orson Scott Card', 'A gifted boy is trained to lead the fight against an alien race.', 'http://books.google.com/books/content?id=jaM7DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('The Martian', 'Andy Weir', 'An astronaut is stranded on Mars and must survive alone.', 'http://books.google.com/books/content?id=pFBMoSyUF0AC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Neuromancer', 'William Gibson', 'A hacker is hired for one last job in a futuristic digital world.', 'http://books.google.com/books/content?id=L1LDjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Ready Player One', 'Ernest Cline', 'A teen races through a virtual world to inherit a tech empire.', 'http://books.google.com/books/content?id=J8ahqXjUhAAC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Snow Crash', 'Neal Stephenson', 'A hacker and pizza delivery guy battles a digital virus.', 'http://books.google.com/books/content?id=inYs79gV4UQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Sci-Fi'),
+('Hyperion', 'Dan Simmons', 'Pilgrims share stories on a journey through time and space.', 'http://books.google.com/books/content?id=CdFXAAAAYAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Foundation', 'Isaac Asimov', 'A scientist predicts the fall of an empire and plans to save knowledge.', 'http://books.google.com/books/content?id=Bv-qf9XUWbgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Sci-Fi'),
+('Project Hail Mary', 'Andy Weir', 'A lone astronaut must save Earth with the help of an alien.', 'http://books.google.com/books/content?id=iEiHEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Sci-Fi'),
+('Altered Carbon', 'Richard K. Morgan', 'Consciousness can be stored and transferred to new bodies.', 'http://books.google.com/books/content?id=L628zVGwNCUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Sci-Fi');
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('The Notebook', 'Nicholas Sparks', 'A timeless love story between Noah and Allie.', 'http://books.google.com/books/content?id=CTWxEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('Pride and Prejudice', 'Jane Austen', 'Elizabeth Bennet navigates love and society in 19th-century England.', 'http://books.google.com/books/content?id=E8Xu5LNhRA4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('Me Before You', 'Jojo Moyes', 'A young woman becomes caregiver to a paralyzed man and changes both their lives.', 'http://books.google.com/books/content?id=rTYEyWrXLO0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('It Ends With Us', 'Colleen Hoover', 'A heart-wrenching love story about resilience and hard choices.', 'http://books.google.com/books/content?id=hfkI0AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Romance'),
+('Twilight', 'Stephenie Meyer', 'A teenage girl falls in love with a vampire.', 'http://books.google.com/books/content?id=lGjFtMRqp_YC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('The Fault in Our Stars', 'John Green', 'Two teenagers meet at a cancer support group and fall in love.', 'http://books.google.com/books/content?id=UzqVUdEtLDwC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Romance'),
+('To All the Boys I’ve Loved Before', 'Jenny Han', 'A girl’s secret love letters get mailed out to all her crushes.', 'http://books.google.com/books/content?id=z-VfDeuhq6kC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('Outlander', 'Diana Gabaldon', 'A WWII nurse is transported back to 18th-century Scotland and finds love.', 'http://books.google.com/books/content?id=DrSZF-wDZCAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Romance'),
+('Beach Read', 'Emily Henry', 'Two authors with writer’s block challenge each other to swap genres.', 'http://books.google.com/books/content?id=jJLxEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Romance'),
+('The Time Traveler’s Wife', 'Audrey Niffenegger', 'A love story complicated by time travel.', 'http://books.google.com/books/content?id=AlMUnwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Romance');
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('Harry Potter and the Sorcerer\'s Stone', 'J.K. Rowling', 'A young wizard discovers his magical heritage and attends Hogwarts.', 'http://books.google.com/books/content?id=e-IIBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Fantasy'),
+('The Hobbit', 'J.R.R. Tolkien', 'Bilbo Baggins embarks on an unexpected journey with dwarves to reclaim a lost treasure.', 'http://books.google.com/books/content?id=ld5GswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Fantasy'),
+('The Name of the Wind', 'Patrick Rothfuss', 'A legendary magician recounts his life story, from orphan to hero.', 'http://books.google.com/books/content?id=ggvVsFqeCqYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Fantasy'),
+('A Game of Thrones', 'George R.R. Martin', 'Noble houses battle for control of the Iron Throne in a brutal fantasy world.', 'http://books.google.com/books/content?id=DiEc7rGWkUYC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Fantasy'),
+('Eragon', 'Christopher Paolini', 'A farm boy finds a dragon egg and begins a journey to save his homeland.', 'http://books.google.com/books/content?id=C-XbNwAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Fantasy'),
+('The Lion, the Witch and the Wardrobe', 'C.S. Lewis', 'Four siblings discover a magical world and help defeat an evil witch.', 'http://books.google.com/books/content?id=ikj-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Fantasy'),
+('Mistborn: The Final Empire', 'Brandon Sanderson', 'A girl with magical powers joins a rebellion to overthrow a dark lord.', 'http://books.google.com/books/content?id=d3ewPoqF04kC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Fantasy'),
+('The Way of Kings', 'Brandon Sanderson', 'Epic battles and ancient secrets unfold on a storm-wracked planet.', 'http://books.google.com/books/content?id=QVn-CgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Fantasy'),
+('City of Bones', 'Cassandra Clare', 'A girl discovers she descends from a line of demon hunters.', 'http://books.google.com/books/content?id=5cD3bbtTzxMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Fantasy'),
+('The Golden Compass', 'Philip Pullman', 'A brave girl journeys north to uncover the truth about a mysterious substance.', 'http://books.google.com/books/content?id=PB0oyQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Fantasy');
+
+
+
+INSERT INTO books (title, author, description, cover_image, genre)
+VALUES
+('The Shining', 'Stephen King', 'A family becomes caretakers of a haunted hotel where the father slowly loses his mind.', 'http://books.google.com/books/content?id=y0GvANfRm80C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Horror'),
+('Dracula', 'Bram Stoker', 'The classic vampire novel that started it all.', 'http://books.google.com/books/content?id=hdrP0AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Horror'),
+('The Haunting of Hill House', 'Shirley Jackson', 'A group investigates a mansion with a sinister reputation.', 'http://books.google.com/books/content?id=pOhhAwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Horror'),
+('Bird Box', 'Josh Malerman', 'A mysterious force drives people to madness if they see it.', 'http://books.google.com/books/content?id=YXYTEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Horror'),
+('Mexican Gothic', 'Silvia Moreno-Garcia', 'A woman investigates strange happenings at a creepy countryside mansion.', 'http://books.google.com/books/content?id=oYC40AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Horror'),
+('Pet Sematary', 'Stephen King', 'A burial ground brings the dead back—but not as they were.', 'http://books.google.com/books/content?id=wUcYEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Horror'),
+('Coraline', 'Neil Gaiman', 'A young girl discovers a disturbing alternate reality.', 'http://books.google.com/books/content?id=pXlAY0XnrQUC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Horror'),
+('The Exorcist', 'William Peter Blatty', 'A mother seeks help for her possessed daughter.', 'http://books.google.com/books/content?id=vtAYk1rR3uMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Horror'),
+('The Silence of the Lambs', 'Thomas Harris', 'An FBI trainee consults a jailed cannibal to catch another killer.', 'No image available', 'Horror'),
+('House of Leaves', 'Mark Z. Danielewski', 'A family moves into a house with shifting, endless hallways.', 'http://books.google.com/books/content?id=o6NzGNODRjkC&printsec=frontcover&img=1&zoom=1&source=gbs_api', 'Horror');
