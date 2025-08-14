@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import Template from '../template'; // Adjust path if needed
+import Template from '../Template'; // Adjust path if needed
 
 const Romance = () => {
     const [books, setBooks] = useState([]);

@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import Template from '../template'; // update the path if needed
+import Template from '../Template'; // update the path if needed
 
 const SciFi = () => {
   const [books, setBooks] = useState([]);

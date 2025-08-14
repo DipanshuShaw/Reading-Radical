@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Template from '../template';
+import Template from '../Template';
 
 const Action = () => {
     const [books, setBooks] = useState([]);

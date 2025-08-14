@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import Template from '../template'; // Adjust the path if needed
+import Template from '../Template'; // Adjust the path if needed
 
 const Horror = () => {
     const [books, setBooks] = useState([]);
