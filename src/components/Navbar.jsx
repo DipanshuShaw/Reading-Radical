@@ -1,87 +1,66 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Menu, X } from "lucide-react"; // Icons for mobile menu toggle
+import { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+
+const LINKS = [
+  { to: '/home', label: 'Home' },
+  { to: '/aboutus', label: 'About Us' },
+  { to: '/explore/all', label: 'Explore', match: '/explore' },
+  { to: '/reviewer', label: 'Reviewer' },
+  { to: '/contact', label: 'Contact' },
+];
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
-    return (
-        <nav className="bg-pink-600">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                    {/* Desktop Menu */}
-<ul className="hidden md:flex flex-grow justify-center space-x-6">
-  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-    <Link
-      to="/home"
-      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
-    >
-      Home
-    </Link>
-  </li>
+  const cls = (isActive, mobile) =>
+    `no-underline font-ui font-bold transition-colors duration-200 ${
+      mobile ? 'block px-4 py-3 text-lg rounded-lg' : 'px-4 py-2 text-lg rounded-full'
+    } ${isActive ? 'bg-white text-brand' : 'text-white hover:bg-white/20'}`;
 
-  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-    <Link
-      to="/aboutus"
-      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
-    >
-      About Us
-    </Link>
-  </li>
+  return (
+    <nav className="bg-brand sticky top-0 z-40 shadow-md">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-14">
+          <ul className="hidden md:flex flex-1 justify-center gap-2 m-0 p-0 list-none">
+            {LINKS.map((l) => (
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  className={({ isActive }) => cls(isActive || (l.match && pathname.startsWith(l.match)), false)}
+                >
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-    <Link
-      to="/explore/all"
-      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
-    >
-      Explore
-    </Link>
-  </li>
+          <span className="md:hidden text-white font-ui font-bold text-lg">Menu</span>
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="md:hidden text-white p-1"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+          >
+            {open ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </div>
 
-  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-    <Link
-      to="/reviewer"
-      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
-    >
-      Reviewer
-    </Link>
-  </li>
-
-  <li className="list-none px-4 py-2 rounded-[20px] hover:bg-white transition-all duration-300">
-    <Link
-      to="/contact"
-      className="no-underline text-white font-bold text-xl font-['Chakra_Petch'] hover:text-pink-600 transition ease-in-out duration-300"
-    >
-      Contact
-    </Link>
-  </li>
-</ul>
-
-
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden">
-                        <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
-                            {isOpen ? <X size={28} /> : <Menu size={28} />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Dropdown Menu */}
-            {isOpen && (
-                <ul className="md:hidden bg-pink-700 space-y-2 py-4 px-6 w-full text-center">
-                    {["Home", "About Us", "Explore", "Reviewer", "Contact Us"].map((item, index) => (
-                        <li key={index} className="list-none py-2">
-                            <Link to={`/${item.toLowerCase().replace(/\s+/g, '')}`} 
-                                className="no-underline text-white font-bold text-lg font-['Chakra_Petch'] block hover:text-pink-300 transition ease-in-out duration-300">
-                                {item}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </nav>
-    );
-}
+      {open && (
+        <ul className="md:hidden bg-brand-dark m-0 p-3 list-none space-y-1">
+          {LINKS.map((l) => (
+            <li key={l.to}>
+              <NavLink to={l.to} onClick={() => setOpen(false)} className={({ isActive }) => cls(isActive || (l.match && pathname.startsWith(l.match)), true)}>
+                {l.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </nav>
+  );
+};
 
 export default Navbar;

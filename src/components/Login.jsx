@@ -1,114 +1,63 @@
-// src/components/Login.jsx
-import { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { api } from '../api';
+import { AuthContext } from '../context/AuthContext';
 import loginImage from '../Images/reviewers-sec1-pic.jpg';
-import { AuthContext } from '../context/AuthContext'; // Ensure correct import
+import AuthShell from './AuthShell';
+
+const input = 'w-full px-4 py-2.5 rounded-lg bg-amber-50 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const location = useLocation();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [remember, setRemember] = useState(true);
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setBusy(true);
+    setError('');
     try {
-      const response = await fetch('http://localhost:5000/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Login failed');
-      }
-
-      const userData = await response.json();
-      login(userData); // Update authentication context
-      navigate('/home'); // Redirect to home page
-    } catch (error) {
-      setErrorMessage(error.message);
+      const data = await api('/api/users/login', { method: 'POST', body: form });
+      login(data, remember);
+      navigate(location.state?.from || '/home', { replace: true });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
-      style={{ backgroundImage: `url(${loginImage})` }}
-    >
-      <form
-        onSubmit={handleSubmit}
-        className="w-full text-white max-w-sm bg-black bg-opacity-40 p-6 rounded-lg shadow-lg"
-      >
-        <div className="text-center border-b-4 border-white pb-2 mb-4">
-          <h3 className="text-xl font-bold">LOGIN</h3>
+    <AuthShell image={loginImage} title="Welcome back" subtitle="Log in to keep reading and reviewing.">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="email" className="block text-sm mb-1">Email</label>
+          <input id="email" type="email" required autoComplete="email" className={input} value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" />
         </div>
-
-        <div className="mb-4">
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            required
-            className="w-full px-4 py-2 border border-gray-300 text-black bg-amber-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
+        <div>
+          <label htmlFor="password" className="block text-sm mb-1">Password</label>
+          <input id="password" type="password" required autoComplete="current-password" className={input} value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Password" />
         </div>
-
-        <div className="mb-4">
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-            className="w-full px-4 py-2 border border-gray-300 text-black bg-amber-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-        <div className="flex items-center mb-4">
-          <input type="checkbox" id="remember" className="mr-2" />
-          <label htmlFor="remember" className="text-sm text-white">
-            Remember Me
-          </label>
-        </div>
-
-        {errorMessage && (
-          <div className="mb-4 text-sm text-red-600">{errorMessage}</div>
-        )}
-
-        <div className="mb-4">
-          <button
-            type="submit"
-            className="block w-full text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-          >
-            LOGIN
-          </button>
-        </div>
-
-        <div className="text-center">
-          <Link to="/register" className="text-blue-600 hover:underline">
-            New User? Register
-          </Link>
-        </div>
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
+          Remember me
+        </label>
+        {error && <p className="text-sm text-red-300 bg-red-950/60 rounded-md px-3 py-2" role="alert">{error}</p>}
+        <button type="submit" disabled={busy}
+          className="w-full bg-brand text-white py-2.5 rounded-lg font-semibold hover:bg-brand-dark transition disabled:opacity-60">
+          {busy ? 'Logging in…' : 'Log in'}
+        </button>
+        <p className="text-center text-sm">
+          New here? <Link to="/register" className="text-sky-300 hover:underline">Create an account</Link>
+        </p>
       </form>
-    </div>
+    </AuthShell>
   );
 };
 

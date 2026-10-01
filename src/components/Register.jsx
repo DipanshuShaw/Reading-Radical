@@ -1,154 +1,75 @@
-// src/components/Register.jsx
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import FeatureNotAvailable from './FeatureNotAvailable';
+import { api } from '../api';
+import { AuthContext } from '../context/AuthContext';
 import registerImage from '../Images/reviewers-sec2-pic.jpg';
-import { AuthContext } from '../context/AuthContext.jsx'; // Corrected import
+import AuthShell from './AuthShell';
+
+const input = 'w-full px-4 py-2.5 rounded-lg bg-amber-50 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400';
 
 const Register = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
+  const [form, setForm] = useState({ email: '', name: '', password: '', is_reviewer: false });
+  const [agree, setAgree] = useState(false);
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
 
-  const [formData, setFormData] = useState({
-    email: '',
-    name: '',
-    password: '',
-    is_reviewer: false,
-  });
-  const [showFeatureModal, setShowFeatureModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, type, checked, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    if (!agree) return setError('Please accept the Terms & Privacy Policy to continue.');
+    setBusy(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', formData);
-      console.log('Registration successful:', response.data);
-      login(response.data); // Pass user data to login
-      navigate('/home'); // Redirect to home page
-    } catch (error) {
-      console.error('Registration error:', error.response?.data || error.message);
-      setErrorMessage(error.response?.data?.error || 'An error occurred during registration.');
+      const data = await api('/api/users/register', { method: 'POST', body: form });
+      login(data, true);
+      navigate('/home', { replace: true });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
-      style={{ backgroundImage: `url(${registerImage})` }}
-    >
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-black bg-opacity-40 text-black p-6 rounded-lg shadow-lg"
-      >
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-pink-600 mb-2">Register</h1>
-          <p className="text-sm text-white">Please fill in this form to create an account.</p>
-          <hr className="my-4" />
+    <AuthShell image={registerImage} title="Create account" subtitle="Join the community of readers and reviewers.">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="name" className="block text-sm mb-1">Username</label>
+          <input id="name" required maxLength={100} autoComplete="username" className={input} value={form.name} onChange={set('name')} placeholder="Username" />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm text-white font-medium mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter Email"
-            required
-            className="w-full px-4 py-2 border bg-amber-50 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
+        <div>
+          <label htmlFor="email" className="block text-sm mb-1">Email</label>
+          <input id="email" type="email" required autoComplete="email" className={input} value={form.email} onChange={set('email')} placeholder="you@example.com" />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm text-white font-medium mb-1">
-            Username
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Username"
-            required
-            className="w-full px-4 py-2 border bg-amber-50 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
+        <div>
+          <label htmlFor="password" className="block text-sm mb-1">Password <span className="text-gray-300">(min 6 characters)</span></label>
+          <input id="password" type="password" required minLength={6} autoComplete="new-password" className={input} value={form.password} onChange={set('password')} placeholder="Password" />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm text-white font-medium mb-1">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-            className="w-full px-4 py-2 border bg-amber-50 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <input
-            type="checkbox"
-            id="is_reviewer"
-            name="is_reviewer"
-            checked={formData.is_reviewer}
-            onChange={handleChange}
-            className="w-5 h-5 border bg-amber-50 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
-          <label htmlFor="is_reviewer" className="ml-2 text-sm text-white font-medium">
-            Become a Reviewer
-          </label>
-        </div>
-
-        {errorMessage && (
-          <div className="mb-4 text-sm text-red-600">
-            {errorMessage}
-          </div>
-        )}
-
-        <hr className="my-4" />
-
-        <p className="text-sm text-white mb-4">
-          By creating an account you agree to our{' '}
-          <a href="#" onClick={() => setShowFeatureModal(true)} className="text-blue-600 hover:underline">
-            Terms & Privacy
-          </a>.
-        </p>
-
-        <button
-          type="submit"
-          className="block w-full text-center bg-pink-600 text-white py-2 rounded-md hover:bg-pink-700 transition"
-        >
-          Register
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" checked={form.is_reviewer} onChange={set('is_reviewer')} className="w-4 h-4" />
+          Become a Reviewer
+        </label>
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} className="w-4 h-4 mt-0.5" />
+          <span>
+            I agree to the{' '}
+            <Link to="/legal#terms" target="_blank" className="text-sky-300 hover:underline">Terms</Link> &amp;{' '}
+            <Link to="/legal#privacy" target="_blank" className="text-sky-300 hover:underline">Privacy Policy</Link>.
+          </span>
+        </label>
+        {error && <p className="text-sm text-red-300 bg-red-950/60 rounded-md px-3 py-2" role="alert">{error}</p>}
+        <button type="submit" disabled={busy}
+          className="w-full bg-brand text-white py-2.5 rounded-lg font-semibold hover:bg-brand-dark transition disabled:opacity-60">
+          {busy ? 'Creating account…' : 'Register'}
         </button>
-
-        <div className="mt-4 text-sm text-center">
-          Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Login
-          </Link>
-        </div>
+        <p className="text-center text-sm">
+          Already have an account? <Link to="/login" className="text-sky-300 hover:underline">Log in</Link>
+        </p>
       </form>
-
-      {showFeatureModal && <FeatureNotAvailable />}
-    </div>
+    </AuthShell>
   );
 };
 

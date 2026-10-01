@@ -1,8 +1,22 @@
-# React + Vite
+# Reading Radical
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Book review site: React + Vite + Tailwind frontend, Express + MySQL backend.
 
-Currently, two official plugins are available:
+## Run it (one command)
+Make sure MySQL is running, then from the project root:
+```
+npm run dev
+```
+This will, automatically:
+1. create `server/.env` from the example if it's missing (set `DB_PASS` and `JWT_SECRET` in it),
+2. install any missing dependencies,
+3. create the `readingradical` database, tables and the 70 seed books on first start,
+4. start the API (http://localhost:5000, auto-restarts on change) and the site (http://localhost:5173, opens in your browser).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Press Ctrl+C once to stop both. Run them separately with `npm run dev:server` / `npm run dev:client`.
+
+Set `VITE_API_URL` (see `.env.example`) if the backend is not on `http://localhost:5000`.
+
+## Features
+Browse/search books by genre, read and write reviews (average ratings shown on cards),
+register/login (JWT, "remember me"), contact/feedback form, legal pages.

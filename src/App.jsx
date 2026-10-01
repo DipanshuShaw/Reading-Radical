@@ -1,196 +1,52 @@
-import '../src/CSS/App.css'
-import AboutUs from './components/AboutUs'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Home from './components/Home'
-import Navbar from './components/Navbar'
-import Contact from './components/Contact'
-import Reviewer from './components/Reviewer'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Login from './components/Login'
-import Register from './components/Register'
-import Explore from './components/Explore'
-import Motivational from './components/ExploreChild/Motivational'
-import Action from './components/ExploreChild/Action'
-import Scifi from './components/ExploreChild/Scifi'
-import Romantic from './components/ExploreChild/Romantic'
-// import Detective from './components/ExploreChild/Detective'
-import All from './components/ExploreChild/All'
-import Horror from './components/ExploreChild/Horror'
-import Fantasy from './components/ExploreChild/Fantasy'
-import ReadReview from './components/ReadReview'
-import Comedy from './components/ExploreChild/Comedy'
-import WriteReview from './components/WriteReview.jsx';
+import { createBrowserRouter, RouterProvider, Navigate, Link } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './components/Home';
+import AboutUs from './components/AboutUs';
+import Contact from './components/Contact';
+import Reviewer from './components/Reviewer';
+import Explore from './components/Explore';
+import ExplorePage from './components/ExplorePage';
+import ReadReview from './components/ReadReview';
+import WriteReview from './components/WriteReview';
+import Legal from './components/Legal';
+import Login from './components/Login';
+import Register from './components/Register';
 
-{/* <Route path="/books/:id/write-review" element={<WriteReview />} /> */}
+const NotFound = () => (
+  <div className="text-center py-24">
+    <h1 className="font-display text-5xl mb-3">404</h1>
+    <p className="text-gray-600 mb-6">We couldn&apos;t find that page.</p>
+    <Link to="/home" className="bg-brand text-white px-6 py-2 rounded-full no-underline">Back home</Link>
+  </div>
+);
 
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Navigate to="/home" replace /> },
+      { path: '/home', element: <Home /> },
+      { path: '/aboutus', element: <AboutUs /> },
+      { path: '/contact', element: <Contact /> },
+      { path: '/reviewer', element: <Reviewer /> },
+      { path: '/legal', element: <Legal /> },
+      { path: '/books/:id/reviews', element: <ReadReview /> },
+      { path: '/books/:id/write-review', element: <WriteReview /> },
+      {
+        path: '/explore',
+        element: <Explore />,
+        children: [
+          { index: true, element: <Navigate to="all" replace /> },
+          { path: ':slug', element: <ExplorePage /> },
+        ],
+      },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+  { path: '/login', element: <Login /> },
+  { path: '/register', element: <Register /> },
+]);
 
+const App = () => <RouterProvider router={router} />;
 
-function App() {
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <Home/>
-        <Footer/>
-      </>
-    },    {
-      path: "/home",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <Home/>
-        <Footer/>
-      </>
-    },
-    {
-      
-      path: "/aboutus",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <AboutUs/>
-        <Footer/>
-      </>
-    },
-    {
-      path: "/contact",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <Contact/>
-        <Footer/>
-      </>
-    },
-    {
-      path: "/reviewer",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <Reviewer/>
-        <Footer/>
-      </>
-    },
-    {
-      path: "/books/:id/reviews",
-      element: 
-      <>
-        <Header />
-        <Navbar />
-        <ReadReview />
-        <Footer />
-      </>
-    },
-    {
-      path: "/books/:id/write-review",
-      element: 
-      <>
-        <Header />
-        <Navbar />
-        <WriteReview />
-        <Footer />
-      </>
-    },
-    {
-      path: "/explore",
-      element: 
-      <>
-        <Header/>
-        <Navbar/>
-        <Explore/>
-        <Footer/>
-      </>,
-      children: [
-        {
-          path: "motivational",
-          element: 
-          <>
-            <Motivational/>
-          </>
-        },
-        {
-          path: "all",
-          element: 
-          <>
-            <All/>
-          </>
-        },
-        {
-          path: "romantic",
-          element: 
-          <>
-            <Romantic/>
-          </>
-        },
-        {
-          path: "scifi",
-          element: 
-          <>
-            <Scifi/>
-          </>
-        },
-        {
-          path: "action",
-          element: 
-          <>
-            <Action/>
-          </>
-        },
-        {
-          path: "fantasy",
-          element: 
-          <>
-            <Fantasy/>
-          </>
-        },
-        {
-          path: "comedy",
-          element: 
-          <>
-            <Comedy/>
-          </>
-        },
-        {
-          path: "horror",
-          element: 
-          <>
-            <Horror/>
-          </>
-        },
-      ]
-    },
-    {
-      path: "/login",
-      element: 
-      <>
-        <Login/>
-      </>
-    },
-    {
-      path: "/register",
-      element: 
-      <>
-        <Register/>
-      </>
-    },
-  ]);
-
-  return (
-    <>
-    <RouterProvider router={router} />
-    </>
-  )
-}
-
-export default App
+export default App;

@@ -1,53 +1,33 @@
 import express from 'express';
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import db from '../db.js';
 
 const router = express.Router();
 
-// ✅ MySQL Connection Pool
-const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || '',
-    database: process.env.DB_NAME || 'readingradical',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-  });
-
-// ✅ Test DB Connection
-(async () => {
-  try {
-    const connection = await pool.getConnection();
-    console.log('✅ Database connected successfully');
-    connection.release();
-  } catch (err) {
-    console.error('❌ Database connection failed:', err.message);
-  }
-})();
-
-// ✅ Feedback POST Route
+// POST /api/feedbacks  { username, email, stars, comment }
 router.post('/', async (req, res) => {
-  console.log("📥 Incoming Request Body:", req.body);
+  const username = String(req.body.username || '').trim();
+  const email = String(req.body.email || '').trim();
+  const comment = String(req.body.comment || '').trim();
+  const stars = Number(req.body.stars);
 
-  const { username, email, stars, comment } = req.body;
-
-  // ✅ Proper Validation
-  if (!username || !email || stars === undefined || stars === null || !comment) {
+  if (!username || !email || !comment || !Number.isInteger(stars)) {
     return res.status(400).json({ success: false, message: 'All fields are required.' });
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false, message: 'Please enter a valid email address.' });
+  }
+  if (stars < 1 || stars > 5) {
+    return res.status(400).json({ success: false, message: 'Rating must be between 1 and 5.' });
+  }
 
   try {
-    const [result] = await pool.execute(
-      'INSERT INTO feedback (username, email, stars, comment) VALUES (?, ?, ?, ?)',
-      [username, email, stars, comment]
-    );
-    return res.json({ success: true, message: 'Feedback submitted successfully.' });
+    await db.query('INSERT INTO feedback (username, email, stars, comment) VALUES (?, ?, ?, ?)', [
+      username, email, stars, comment,
+    ]);
+    res.status(201).json({ success: true, message: 'Feedback submitted successfully.' });
   } catch (err) {
-    console.error('❌ Database error:', err.message);
-    return res.status(500).json({ success: false, message: 'Database error.' });
+    console.error('Feedback error:', err.message);
+    res.status(500).json({ success: false, message: 'Could not save feedback. Please try again.' });
   }
 });
 

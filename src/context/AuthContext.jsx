@@ -1,37 +1,47 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 
-// Create the Auth context
-export const AuthContext = createContext();
+export const AuthContext = createContext({
+  user: null,
+  token: null,
+  login: () => {},
+  logout: () => {},
+});
 
-// AuthProvider component
+const KEY = 'rr_auth';
+
+// "Remember me" -> localStorage (survives restart). Otherwise sessionStorage (cleared on tab close).
+function readStored() {
+  try {
+    const raw = localStorage.getItem(KEY) || sessionStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : { user: null, token: null };
+  } catch {
+    return { user: null, token: null };
+  }
+}
+
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [auth, setAuth] = useState(readStored);
 
-  // Login function saves user info to state and localStorage
-  const login = (userData) => {
-    setUser(userData); // userData should contain a `name` field
-    localStorage.setItem('user', JSON.stringify(userData));
-  };
-
-  // Logout function clears user info
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-  };
-
-  // On component mount, load user from localStorage if available
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+  // data = { user, token } as returned by /api/users/login or /register
+  const login = useCallback((data, remember = true) => {
+    const next = { user: data.user, token: data.token };
+    localStorage.removeItem(KEY);
+    sessionStorage.removeItem(KEY);
+    (remember ? localStorage : sessionStorage).setItem(KEY, JSON.stringify(next));
+    setAuth(next);
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const logout = useCallback(() => {
+    localStorage.removeItem(KEY);
+    sessionStorage.removeItem(KEY);
+    setAuth({ user: null, token: null });
+  }, []);
+
+  const value = useMemo(() => ({ ...auth, login, logout }), [auth, login, logout]);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+AuthProvider.propTypes = { children: PropTypes.node };
 
 export default AuthProvider;

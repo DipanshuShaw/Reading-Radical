@@ -1,76 +1,33 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+import { GENRES } from '../config';
 
-const Explore = () => {
-  const location = useLocation();
-
-  const getLinkClass = (to, isActive) => {
-    const baseClasses =
-      'block px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200';
-    const activeClasses = 'bg-pink-600 text-white';
-    const inactiveClasses = 'text-gray-700 hover:bg-blue-100';
-
-    const isDefaultAll = to === '/explore/all' && location.pathname === '/explore';
-
-    return `${baseClasses} ${isActive || isDefaultAll ? activeClasses : inactiveClasses}`;
-  };
-
-  return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <aside className="w-48 sm:w-60 bg-gray-100 p-4 shadow-md h-full">
-        <h2 className="text-lg font-bold mb-4 text-pink-700">Genres</h2>
-        <nav>
-          <ul className="space-y-2">
-            <li>
-              <NavLink to="/explore/all" className={({ isActive }) => getLinkClass('/explore/all', isActive)}>
-                All
+const Explore = () => (
+  <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+    <aside className="md:w-56 shrink-0">
+      <h2 className="text-lg font-bold mb-3 text-brand text-left">Genres</h2>
+      <nav aria-label="Genres">
+        <ul className="list-none m-0 p-0 flex md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0 md:sticky md:top-20">
+          {GENRES.map((g) => (
+            <li key={g.slug} className="shrink-0">
+              <NavLink
+                to={`/explore/${g.slug}`}
+                className={({ isActive }) =>
+                  `block px-4 py-2 text-sm font-semibold rounded-full md:rounded-lg no-underline text-left transition-colors ${
+                    isActive ? 'bg-brand text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+                  }`
+                }
+              >
+                {g.label}
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/explore/romantic" className={({ isActive }) => getLinkClass('/explore/romantic', isActive)}>
-                Romantic
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/action" className={({ isActive }) => getLinkClass('/explore/action', isActive)}>
-                Action
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/motivational" className={({ isActive }) => getLinkClass('/explore/motivational', isActive)}>
-                Motivational
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/scifi" className={({ isActive }) => getLinkClass('/explore/scifi', isActive)}>
-                Sci-Fi
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/comedy" className={({ isActive }) => getLinkClass('/explore/comedy', isActive)}>
-                Comedy
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/fantasy" className={({ isActive }) => getLinkClass('/explore/fantasy', isActive)}>
-                Fantasy
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore/horror" className={({ isActive }) => getLinkClass('/explore/horror', isActive)}>
-                Horror
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-4 overflow-y-auto">
-        <Outlet />
-      </main>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+    <div className="flex-1 min-w-0">
+      <Outlet />
     </div>
-  );
-};
+  </div>
+);
 
 export default Explore;

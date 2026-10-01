@@ -2,31 +2,62 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../db.js';
 
-export const registerUser = (req, res) => {
-  const { name, email, password, is_reviewer } = req.body;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Hash the password
-  const hashedPassword = bcrypt.hashSync(password, 10);
+// Never send password_hash to the browser.
+const publicUser = (u) => ({
+  id: u.user_id,
+  name: u.name,
+  email: u.email,
+  is_reviewer: !!u.is_reviewer,
+});
 
-  const sql = 'INSERT INTO users (name, email, password_hash, is_reviewer) VALUES (?, ?, ?, ?)';
-  db.query(sql, [name, email, hashedPassword, is_reviewer], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ message: 'User registered successfully' });
-  });
+const signToken = (u) =>
+  jwt.sign({ userId: u.user_id, name: u.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+export const registerUser = async (req, res) => {
+  try {
+    const name = String(req.body.name || '').trim();
+    const email = String(req.body.email || '').trim().toLowerCase();
+    const password = String(req.body.password || '');
+    const isReviewer = req.body.is_reviewer ? 1 : 0;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Name, email and password are required.' });
+    }
+    if (!EMAIL_RE.test(email)) return res.status(400).json({ error: 'Please enter a valid email address.' });
+    if (password.length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters.' });
+
+    const [existing] = await db.query('SELECT user_id FROM users WHERE email = ?', [email]);
+    if (existing.length) return res.status(409).json({ error: 'An account with this email already exists.' });
+
+    const hash = await bcrypt.hash(password, 10);
+    const [result] = await db.query(
+      'INSERT INTO users (name, email, password_hash, is_reviewer) VALUES (?, ?, ?, ?)',
+      [name, email, hash, isReviewer]
+    );
+    const user = { user_id: result.insertId, name, email, is_reviewer: isReviewer };
+    res.status(201).json({ message: 'User registered successfully', token: signToken(user), user: publicUser(user) });
+  } catch (err) {
+    console.error('Register error:', err.message);
+    res.status(500).json({ error: 'Could not create account. Please try again.' });
+  }
 };
 
-export const loginUser = (req, res) => {
-  const { email, password } = req.body;
+export const loginUser = async (req, res) => {
+  try {
+    const email = String(req.body.email || '').trim().toLowerCase();
+    const password = String(req.body.password || '');
+    if (!email || !password) return res.status(400).json({ error: 'Email and password are required.' });
 
-  const sql = 'SELECT * FROM users WHERE email = ?';
-  db.query(sql, [email], (err, results) => {
-    if (err || results.length === 0) return res.status(401).json({ error: 'Invalid email or password' });
-
-    const user = results[0];
-    const isMatch = bcrypt.compareSync(password, user.password_hash);
-    if (!isMatch) return res.status(401).json({ error: 'Invalid email or password' });
-
-    const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token, user });
-  });
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    const user = rows[0];
+    if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    res.json({ token: signToken(user), user: publicUser(user) });
+  } catch (err) {
+    console.error('Login error:', err.message);
+    res.status(500).json({ error: 'Login failed. Please try again.' });
+  }
 };

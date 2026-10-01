@@ -1,55 +1,56 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AuthProvider, { AuthContext } from '../context/AuthContext';
-import logo from "./../Images/RRlogo.png";
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { SITE } from '../config';
+import logo from '../Images/RRlogo.png';
+
+const btn =
+  "px-4 py-1.5 border rounded-lg font-bold text-sm font-ui transition-all duration-300 whitespace-nowrap";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/home');
+  };
 
   return (
-    <header className="bg-neutral-900 text-white p-4 flex flex-col md:flex-row items-center justify-between relative">
-      {/* Logo */}
-      <div className="">
-        <img src={logo} alt="Logo" className="w-12" />
-      </div>
+    <header className="bg-neutral-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <Link to="/home" className="flex items-center gap-3 no-underline text-white" aria-label="Reading Radical home">
+          <img src={logo} alt="" className="w-11 h-11 object-contain" />
+          <span className="font-display text-2xl sm:text-3xl leading-none">
+            <span className="text-brand text-3xl sm:text-4xl">R</span>eading{' '}
+            <span className="text-brand text-3xl sm:text-4xl">R</span>adical
+          </span>
+        </Link>
 
-      {/* Heading - Hidden on small screens */}
-      <h1 className="hidden md:flex text-center text-2xl md:text-4xl font-bold font-[Agbalumo] w-1/3 items-end mx-auto justify-center text-white">
-        <span className="text-pink-600 text-[54px] font-[Agbalumo]">R</span>eading&nbsp;
-        <span className="text-pink-600 text-[54px] font-[Agbalumo]">R</span>adical
-      </h1>
-
-      {/* Contact & Buttons */}
-      <div className="absolute right-3 top-5 flex items-center space-x-4">
-        <span className="text-sm md:text-lg font-medium max-xl:hidden">Contact: +918766548239</span>
-        {user ? (
-          <>
-            <span className="text-sm md:text-lg font-medium max-sm:hidden">
-              Welcome, <span className="text-pink-500 text-md md:text-xl font-semibold">{user.name || "User"} </span>
-            </span>
-            <button
-              onClick={logout}
-              className="px-4 py-1.5 border border-red-500 text-red-500 bg-transparent rounded-lg font-bold text-base font-['Chakra_Petch'] transition-all duration-500 hover:bg-red-500 hover:text-white"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link
-              to="/login"
-              className="px-4 py-1.5 border border-red-500 text-red-500 bg-transparent rounded-lg font-bold text-base font-['Chakra_Petch'] transition-all duration-500 hover:bg-red-500 hover:text-white"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="px-4 py-1.5 border border-blue-500 text-blue-500 bg-transparent rounded-lg font-bold text-base font-['Chakra_Petch'] transition-all duration-500 hover:bg-blue-500 hover:text-white"
-            >
-              Register
-            </Link>
-          </>
-        )}
+        <div className="flex items-center gap-2 sm:gap-4">
+          <a href={`tel:${SITE.phone.replace(/[^+\d]/g, '')}`} className="hidden xl:block text-sm text-gray-300 hover:text-white no-underline">
+            Contact: {SITE.phone}
+          </a>
+          {user ? (
+            <>
+              <span className="hidden sm:block text-sm md:text-base">
+                Welcome, <span className="text-pink-400 font-semibold">{user.name || 'Reader'}</span>
+              </span>
+              <button onClick={handleLogout} className={`${btn} border-red-500 text-red-400 hover:bg-red-500 hover:text-white`}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className={`${btn} border-red-500 text-red-400 hover:bg-red-500 hover:text-white no-underline`}>
+                Login
+              </Link>
+              <Link to="/register" className={`${btn} border-sky-400 text-sky-300 hover:bg-sky-500 hover:text-white no-underline`}>
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

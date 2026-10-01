@@ -1,61 +1,69 @@
-// import React from 'react'
+import { Link } from 'react-router-dom';
+import { SITE } from '../config';
 
-const Footer = () => {
-  return (
-    <>
-          <footer className="foot">
-        <ul>
-            <p>Navigate</p>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="About.html">About Us</a></li>
-            <li><a href="explore.html">Explore</a></li>
-            <li><a href="Reviewers.html">Reviewers</a></li>
-            <li><a href="Contact.html">Contact Us</a></li>
+const social = [
+  ['fa-facebook-f', 'https://www.facebook.com/', 'Facebook'],
+  ['fa-whatsapp', 'https://www.whatsapp.com/', 'WhatsApp'],
+  ['fa-linkedin-in', 'https://www.linkedin.com/', 'LinkedIn'],
+  ['fa-twitter', 'https://www.twitter.com/', 'Twitter'],
+  ['fa-instagram', 'https://www.instagram.com/', 'Instagram'],
+];
+
+const linkCls = 'text-gray-300 hover:text-pink-400 no-underline transition-colors';
+
+const Footer = () => (
+  <footer className="bg-neutral-900 text-gray-300 mt-auto">
+    <div className="max-w-7xl mx-auto px-6 py-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <h3 className="text-white font-ui font-bold text-lg mb-3">Navigate</h3>
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li><Link className={linkCls} to="/home">Home</Link></li>
+          <li><Link className={linkCls} to="/aboutus">About Us</Link></li>
+          <li><Link className={linkCls} to="/explore/all">Explore</Link></li>
+          <li><Link className={linkCls} to="/reviewer">Reviewers</Link></li>
+          <li><Link className={linkCls} to="/contact">Contact Us</Link></li>
         </ul>
-        <ul>
-            <p>Connect Us</p>
-            <li><a href="">Terms of Service</a></li>
-            <li><a href="">Privacy Policy</a></li>
-            <li><a href="">Copyrights</a></li>
-            <li><a href="">Personal Details</a></li>
-            <li><a href="">Know More</a></li>
+      </div>
+
+      <div>
+        <h3 className="text-white font-ui font-bold text-lg mb-3">Legal</h3>
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li><Link className={linkCls} to="/legal#terms">Terms of Service</Link></li>
+          <li><Link className={linkCls} to="/legal#privacy">Privacy Policy</Link></li>
+          <li><Link className={linkCls} to="/legal#copyright">Copyrights</Link></li>
         </ul>
-        <section className="footer-about">
-            <h1 className="heading">
-                <div className=""><span>R</span>eading &nbsp;<span>R</span>adical</div>
-            </h1>
-            <div className="about-text">India&apos;s No.1 online book review page</div>
-            <div className="about-text">Most trusted and loved reviews across the globe</div>
-            <div className="about-text">Reviews done by proffesional book reviewers from all over world</div>
-            <div className="about-text">Reviews copyright under &copy;Copyright act 2023. <a href="#">All rights reserved</a></div>
-            <br/>
-        </section>
-        <section className="footer-contact">
-            <div className="about-text"><span>Contact Us: </span> +918876523985</div>
-            <div className="about-text"><span>E-mail Us: </span> readingrads@gmail.com</div>
-            <br/><br/><br/>
-        </section>
-        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 p-4">
-  <a className="w-16 h-16 md:w-20 md:h-20 flex justify-center items-center" href="https://www.facebook.com/">
-    <i className="text-3xl md:text-4xl fa-brands fa-facebook-f text-blue-500"></i>
-  </a>
-  <a className="w-16 h-16 md:w-20 md:h-20 flex justify-center items-center" href="https://www.whatsapp.com/">
-    <i className="text-3xl md:text-4xl fa-brands fa-whatsapp text-green-400"></i>
-  </a>
-  <a className="w-16 h-16 md:w-20 md:h-20 flex justify-center items-center" href="https://www.linkedin.com/">
-    <i className="text-3xl md:text-4xl fa-brands fa-linkedin-in text-blue-600"></i>
-  </a>
-  <a className="w-16 h-16 md:w-20 md:h-20 flex justify-center items-center" href="https://www.twitter.com/">
-    <i className="text-3xl md:text-4xl fa-brands fa-twitter text-blue-400"></i>
-  </a>
-  <a className="w-16 h-16 md:w-20 md:h-20 flex justify-center items-center" href="https://www.instagram.com/">
-    <i className="text-3xl md:text-4xl fa-brands fa-instagram text-pink-500"></i>
-  </a>
-</div>
+      </div>
 
-    </footer>
-    </>
-  )
-}
+      <div className="lg:col-span-2">
+        <h3 className="font-display text-2xl text-white mb-3">
+          <span className="text-brand">R</span>eading <span className="text-brand">R</span>adical
+        </h3>
+        <p className="text-sm mb-1">India&apos;s No.1 online book review page.</p>
+        <p className="text-sm mb-4">Honest reviews from readers and reviewers around the world.</p>
+        <p className="text-sm mb-1"><span className="text-white font-semibold">Call: </span>{SITE.phone}</p>
+        <p className="text-sm"><span className="text-white font-semibold">Email: </span>
+          <a className={linkCls} href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+        <div className="flex gap-3 mt-5">
+          {social.map(([icon, href, label]) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-brand flex items-center justify-center text-white transition-colors"
+            >
+              <i className={`fa-brands ${icon}`}></i>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div className="border-t border-white/10 text-center text-xs text-gray-400 py-4">
+      &copy; {new Date().getFullYear()} Reading Radical. All rights reserved.
+    </div>
+  </footer>
+);
 
-export default Footer
+export default Footer;

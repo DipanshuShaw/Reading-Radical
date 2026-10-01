@@ -1,54 +1,64 @@
 import express from 'express';
-import mysql from 'mysql2/promise';
+import db from '../db.js';
 
 const router = express.Router();
 
-// ✅ Create MySQL pool
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'dip@1016',
-  database: 'readingradical',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
-
-// ✅ GET all books or by genre
-// ✅ GET all books or books by genre - /api/books or /api/books?genre=Action
+// GET /api/books            -> all books (with average rating + review count)
+// GET /api/books?genre=Action
+// GET /api/books?q=dune     -> search title/author
 router.get('/', async (req, res) => {
-  const genre = req.query.genre;
-
+  const { genre, q } = req.query;
   try {
-    let query = 'SELECT * FROM books';
-    let params = [];
+    let sql = `
+      SELECT b.*, ROUND(AVG(r.rating), 1) AS avg_rating, COUNT(r.rating) AS review_count
+      FROM books b
+      LEFT JOIN reviews r ON r.book_id = b.book_id`;
+    const where = [];
+    const params = [];
+    if (genre) { where.push('b.genre = ?'); params.push(genre); }
+    if (q) { where.push('(b.title LIKE ? OR b.author LIKE ?)'); params.push(`%${q}%`, `%${q}%`); }
+    if (where.length) sql += ' WHERE ' + where.join(' AND ');
+    sql += ' GROUP BY b.book_id ORDER BY b.title';
 
-    if (genre) {
-      query += ' WHERE genre = ?';
-      params.push(genre);
-    }
-
-    const [books] = await pool.query(query, params);
+    const [books] = await db.query(sql, params);
     res.json(books);
   } catch (err) {
-    console.error('❌ Error fetching books:', err.message);
+    console.error('Error fetching books:', err.message);
     res.status(500).json({ error: 'Failed to fetch books' });
   }
 });
 
-
-// ✅ GET book by ID
 router.get('/:id', async (req, res) => {
-  const bookId = req.params.id;
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Invalid book id' });
   try {
-    const [rows] = await pool.query('SELECT * FROM books WHERE book_id = ?', [bookId]);
-    if (rows.length === 0) {
-      return res.status(404).json({ error: 'Book not found' });
-    }
+    const [rows] = await db.query(
+      `SELECT b.*, ROUND(AVG(r.rating), 1) AS avg_rating, COUNT(r.rating) AS review_count
+       FROM books b LEFT JOIN reviews r ON r.book_id = b.book_id
+       WHERE b.book_id = ? GROUP BY b.book_id`,
+      [id]
+    );
+    if (!rows.length) return res.status(404).json({ error: 'Book not found' });
     res.json(rows[0]);
   } catch (err) {
-    console.error('Error fetching book by ID:', err);
+    console.error('Error fetching book:', err.message);
     res.status(500).json({ error: 'Failed to fetch book' });
+  }
+});
+
+// GET /api/books/:id/reviews
+router.get('/:id/reviews', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Invalid book id' });
+  try {
+    const [rows] = await db.query(
+      'SELECT reviewer, comment, rating FROM reviews WHERE book_id = ?',
+      [id]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error('Error fetching reviews:', err.message);
+    res.status(500).json({ error: 'Failed to fetch reviews' });
   }
 });
 
