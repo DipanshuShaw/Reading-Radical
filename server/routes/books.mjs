@@ -7,7 +7,8 @@ const router = express.Router();
 // GET /api/books?genre=Action
 // GET /api/books?q=dune     -> search title/author
 router.get('/', async (req, res) => {
-  const { genre, q } = req.query;
+  const { genre, q, sort } = req.query;
+  const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 0, 0), 100);
   try {
     let sql = `
       SELECT b.*, ROUND(AVG(r.rating), 1) AS avg_rating, COUNT(r.rating) AS review_count
@@ -18,7 +19,12 @@ router.get('/', async (req, res) => {
     if (genre) { where.push('b.genre = ?'); params.push(genre); }
     if (q) { where.push('(b.title LIKE ? OR b.author LIKE ?)'); params.push(`%${q}%`, `%${q}%`); }
     if (where.length) sql += ' WHERE ' + where.join(' AND ');
-    sql += ' GROUP BY b.book_id ORDER BY b.title';
+    sql += ' GROUP BY b.book_id';
+    // ?sort=top -> best rated first (unrated books last); default A-Z
+    sql += sort === 'top'
+      ? ' ORDER BY avg_rating IS NULL, avg_rating DESC, review_count DESC, b.title'
+      : ' ORDER BY b.title';
+    if (limit) { sql += ' LIMIT ?'; params.push(limit); }
 
     const [books] = await db.query(sql, params);
     res.json(books);

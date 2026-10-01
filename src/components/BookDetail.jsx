@@ -8,14 +8,14 @@ const BookDetail = ({ book }) => {
   const onWritePage = pathname.endsWith('/write-review');
 
   return (
-    <section className="bg-white rounded-3xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-8">
+    <section className="bg-white rounded-3xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 overflow-hidden">
       <BookCover
         src={book.cover_image}
         title={book.title}
         author={book.author}
-        className="w-full md:w-64 h-80 md:h-96 rounded-2xl shadow-md shrink-0"
+        className="w-full md:w-64 h-80 md:h-96 rounded-2xl shadow-md shrink-0 overflow-hidden"
       />
-      <div className="text-left flex flex-col">
+      <div className="text-left flex flex-col min-w-0 flex-1">
         <span className="self-start text-xs uppercase tracking-wide font-semibold text-white bg-indigo-500 rounded-full px-3 py-1">
           {book.genre || 'Uncategorised'}
         </span>

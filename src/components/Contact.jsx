@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Phone, Mail, MessageSquare } from 'lucide-react';
 import { api } from '../api';
 import { SITE } from '../config';
+import { CONTACT_FAQ } from '../content';
+import Faq from './Faq';
 import StarPicker from './StarPicker';
 
 const field = 'w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand';
@@ -49,6 +51,8 @@ const Contact = () => {
           </a>
         ))}
       </div>
+
+      <div className="-mx-4"><Faq items={CONTACT_FAQ} title="Before you write" /></div>
 
       <section id="feedback" className="max-w-2xl mx-auto mt-14 bg-white rounded-3xl shadow-md p-8 scroll-mt-24">
         <h2 className="text-3xl font-semibold text-center mb-8">Leave a Feedback</h2>

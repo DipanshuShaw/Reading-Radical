@@ -10,10 +10,10 @@ const BookCard = ({ book }) => (
         src={book.cover_image}
         title={book.title}
         author={book.author}
-        className="w-full h-72 group-hover:scale-105 transition-transform duration-500"
+        className="w-full h-72 group-hover:scale-105 transition-transform duration-500 block"
       />
     </Link>
-    <div className="p-4 flex flex-col flex-1">
+    <div className="p-4 flex flex-col flex-1 min-w-0">
       <span className="self-start text-[11px] uppercase tracking-wide font-semibold text-brand bg-pink-50 rounded-full px-2 py-0.5">
         {book.genre}
       </span>

@@ -9,13 +9,21 @@
   --color-ink: #1c1b22;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+/* Tailwind v4 compat: keep gray default borders and pointer cursors on buttons */
+*, ::after, ::before, ::backdrop { border-color: var(--color-gray-200, currentColor); }
+button:not(:disabled), [role="button"]:not(:disabled), [role="radio"] { cursor: pointer; }
+
+img, svg, video { max-width: 100%; }
+h1, h2, h3, p, li, a { overflow-wrap: anywhere; }
 body {
   margin: 0;
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 #root { min-height: 100vh; display: flex; flex-direction: column; }
 

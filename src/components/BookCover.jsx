@@ -31,11 +31,11 @@ const BookCover = ({ src, title, author, className = '' }) => {
     <div
       role="img"
       aria-label={`Cover of ${title}`}
-      className={`flex flex-col items-center justify-center text-center text-white p-4 ${className}`}
+      className={`flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden ${className}`}
       style={{ background: `linear-gradient(135deg, ${a}, ${b})` }}
     >
-      <span className="font-display text-xl sm:text-2xl leading-tight drop-shadow">{title}</span>
-      {author && <span className="mt-2 text-xs sm:text-sm opacity-90">{author}</span>}
+      <span className="font-display text-xl sm:text-2xl leading-tight drop-shadow line-clamp-4 w-full">{title}</span>
+      {author && <span className="mt-2 text-xs sm:text-sm opacity-90 line-clamp-2 w-full">{author}</span>}
     </div>
   );
 };

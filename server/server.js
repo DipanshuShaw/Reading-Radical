@@ -10,6 +10,7 @@ import usersRouter from './routes/users.mjs';
 import booksRouter from './routes/books.mjs';
 import reviewsRouter from './routes/reviews.mjs';
 import feedbacksRouter from './routes/feedbacks.mjs';
+import statsRouter from './routes/stats.mjs';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -28,6 +29,7 @@ app.use('/api/books', booksRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/feedbacks', feedbacksRouter);
+app.use('/api/stats', statsRouter);
 
 // Unknown API route
 app.use('/api', (_req, res) => res.status(404).json({ error: 'Not found' }));

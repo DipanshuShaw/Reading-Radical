@@ -5,7 +5,7 @@ import { SITE } from '../config';
 import logo from '../Images/RRlogo.png';
 
 const btn =
-  "px-4 py-1.5 border rounded-lg font-bold text-sm font-ui transition-all duration-300 whitespace-nowrap";
+  "px-3 sm:px-4 py-1.5 border rounded-lg font-bold text-sm font-ui transition-all duration-300 whitespace-nowrap";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
@@ -18,12 +18,12 @@ const Header = () => {
 
   return (
     <header className="bg-neutral-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <Link to="/home" className="flex items-center gap-3 no-underline text-white" aria-label="Reading Radical home">
           <img src={logo} alt="" className="w-11 h-11 object-contain" />
-          <span className="font-display text-2xl sm:text-3xl leading-none">
-            <span className="text-brand text-3xl sm:text-4xl">R</span>eading{' '}
-            <span className="text-brand text-3xl sm:text-4xl">R</span>adical
+          <span className="font-display text-xl sm:text-3xl leading-none whitespace-nowrap">
+            <span className="text-brand text-2xl sm:text-4xl">R</span>eading{' '}
+            <span className="text-brand text-2xl sm:text-4xl">R</span>adical
           </span>
         </Link>
 
