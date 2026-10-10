@@ -17,6 +17,9 @@ Press Ctrl+C once to stop both. Run them separately with `npm run dev:server` / 
 
 Set `VITE_API_URL` (see `.env.example`) if the backend is not on `http://localhost:5000`.
 
+## Deploy
+See [DEPLOY.md](DEPLOY.md) for Railway (API + MySQL) and Vercel (frontend).
+
 ## Features
 Browse/search books by genre, read and write reviews (average ratings shown on cards),
 register/login (JWT, "remember me"), contact/feedback form, legal pages.

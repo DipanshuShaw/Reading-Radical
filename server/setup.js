@@ -2,9 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { baseConfig, dbName } from './dbConfig.js';
 
 const dir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'sql');
 
@@ -19,13 +17,8 @@ const read = (f) =>
 // Creates the database + tables if missing and seeds books on first run.
 // Safe to run on every start.
 export async function setupDatabase() {
-  const name = process.env.DB_NAME || 'readingradical';
-  const conn = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || '',
-    multipleStatements: true,
-  });
+  const name = dbName();
+  const conn = await mysql.createConnection({ ...baseConfig(), multipleStatements: true });
   try {
     await conn.query(`CREATE DATABASE IF NOT EXISTS \`${name}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
     await conn.query(`USE \`${name}\``);
