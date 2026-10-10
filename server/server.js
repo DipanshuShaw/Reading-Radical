@@ -6,6 +6,7 @@ dotenv.config();
 
 import { checkConnection } from './db.js';
 import { setupDatabase } from './setup.js';
+import { baseConfig, dbName, describeError } from './dbConfig.js';
 import usersRouter from './routes/users.mjs';
 import booksRouter from './routes/books.mjs';
 import reviewsRouter from './routes/reviews.mjs';
@@ -63,13 +64,26 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Something went wrong' });
 });
 
-// Create DB/tables/seed automatically, then start listening.
-try {
-  await setupDatabase();
-} catch (err) {
-  console.error('❌ Automatic database setup failed:', err.message);
-  console.error('   Is MySQL running, and are DB_USER / DB_PASS in server/.env correct?');
+// Create DB/tables/seed automatically. On Railway the MySQL service may still be booting when the API
+// starts, so retry for a while instead of giving up on the first refused connection.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+async function setupWithRetry() {
+  const attempts = Number(process.env.DB_SETUP_RETRIES) || 12;
+  const delay = Number(process.env.DB_SETUP_RETRY_MS) || 5000;
+  const c = baseConfig();
+  console.log(`Connecting to MySQL at ${c.host}:${c.port} as ${c.user}, database "${dbName()}"`);
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      await setupDatabase();
+      return;
+    } catch (err) {
+      console.error(`❌ Database setup failed (attempt ${i}/${attempts}): ${describeError(err)}`);
+      if (i < attempts) await sleep(delay);
+    }
+  }
+  console.error('❌ Giving up on automatic setup. Check DB_HOST / DB_PORT / DB_USER / DB_PASS / DB_NAME and that MySQL is running.');
 }
+await setupWithRetry();
 
 app.listen(port, async () => {
   console.log(`Server running on http://localhost:${port}`);

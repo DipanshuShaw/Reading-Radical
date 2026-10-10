@@ -52,3 +52,11 @@ export const baseConfig = () => {
 
 export const dbName = () =>
   process.env.DB_NAME || fromUrl().database || process.env.MYSQLDATABASE || 'readingradical';
+
+// Node's connection errors are often an AggregateError with an EMPTY message
+// (it tried IPv6 and IPv4). This always yields something readable.
+export const describeError = (err) =>
+  err?.message ||
+  err?.code ||
+  (err?.errors || []).map((e) => `${e.code || e.message} ${e.address || ''}:${e.port || ''}`.trim()).join(' | ') ||
+  String(err);
