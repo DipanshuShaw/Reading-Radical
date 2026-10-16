@@ -54,7 +54,7 @@ const Login = () => {
           {busy ? 'Logging in…' : 'Log in'}
         </button>
         <p className="text-center text-sm">
-          New here? <Link to="/register" className="text-sky-300 hover:underline">Create an account</Link>
+          New here? <Link to="/register" state={location.state} className="text-sky-300 hover:underline">Create an account</Link>
         </p>
       </form>
     </AuthShell>

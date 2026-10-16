@@ -26,3 +26,9 @@ dist-ssr
 # secrets
 .env
 server/.env
+
+# data-engineering
+data-engineering/.env
+data-engineering/__pycache__/
+data-engineering/**/__pycache__/
+*.pyc

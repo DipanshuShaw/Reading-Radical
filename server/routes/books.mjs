@@ -1,5 +1,6 @@
 import express from 'express';
 import db from '../db.js';
+import { orderByFor } from '../sorting.js';
 
 const router = express.Router();
 
@@ -20,10 +21,8 @@ router.get('/', async (req, res) => {
     if (q) { where.push('(b.title LIKE ? OR b.author LIKE ?)'); params.push(`%${q}%`, `%${q}%`); }
     if (where.length) sql += ' WHERE ' + where.join(' AND ');
     sql += ' GROUP BY b.book_id';
-    // ?sort=top -> best rated first (unrated books last); default A-Z
-    sql += sort === 'top'
-      ? ' ORDER BY avg_rating IS NULL, avg_rating DESC, review_count DESC, b.title'
-      : ' ORDER BY b.title';
+    // ?sort=title|title_desc|author|rating|reviews (default title). Unknown values fall back to the default.
+    sql += ' ORDER BY ' + orderByFor(sort);
     if (limit) { sql += ' LIMIT ?'; params.push(limit); }
 
     const [books] = await db.query(sql, params);

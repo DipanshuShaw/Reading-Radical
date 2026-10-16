@@ -1,19 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Phone, Mail, MessageSquare } from 'lucide-react';
 import { api } from '../api';
+import { AuthContext } from '../context/AuthContext';
 import { SITE } from '../config';
 import { CONTACT_FAQ } from '../content';
 import Faq from './Faq';
+import LoginRequired from './LoginRequired';
 import StarPicker from './StarPicker';
 
 const field = 'w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand';
 
 const Contact = () => {
-  const [form, setForm] = useState({ username: '', email: '', stars: 0, comment: '' });
+  const { user, token, logout } = useContext(AuthContext);
+  const [form, setForm] = useState({ stars: 0, comment: '' });
   const [status, setStatus] = useState(null); // { ok, text }
   const [busy, setBusy] = useState(false);
-
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +22,17 @@ const Contact = () => {
     setBusy(true);
     setStatus(null);
     try {
-      await api('/api/feedbacks', { method: 'POST', body: form });
+      // Name and e-mail come from the logged-in account on the server, so only rating + comment are sent.
+      await api('/api/feedbacks', { method: 'POST', token, body: form });
       setStatus({ ok: true, text: 'Thank you! Your feedback was submitted.' });
-      setForm({ username: '', email: '', stars: 0, comment: '' });
+      setForm({ stars: 0, comment: '' });
     } catch (err) {
-      setStatus({ ok: false, text: err.message });
+      if (err.status === 401) {
+        logout();
+        setStatus({ ok: false, text: 'Your session expired. Please log in again.' });
+      } else {
+        setStatus({ ok: false, text: err.message });
+      }
     } finally {
       setBusy(false);
     }
@@ -56,23 +63,36 @@ const Contact = () => {
 
       <section id="feedback" className="max-w-2xl mx-auto mt-14 bg-white rounded-3xl shadow-md p-8 scroll-mt-24">
         <h2 className="text-3xl font-semibold text-center mb-8">Leave a Feedback</h2>
-        <form onSubmit={handleSubmit} className="space-y-5 text-left">
-          <input className={field} placeholder="Your name" aria-label="Your name" required value={form.username} onChange={set('username')} />
-          <input className={field} type="email" placeholder="Your email" aria-label="Your email" required value={form.email} onChange={set('email')} />
-          <div className="flex items-center gap-4">
-            <span className="text-gray-700">Rating:</span>
-            <StarPicker value={form.stars} onChange={(n) => setForm({ ...form, stars: n })} size="text-2xl" />
-          </div>
-          <textarea className={`${field} h-32 resize-none`} placeholder="Write a comment" aria-label="Comment" required value={form.comment} onChange={set('comment')} />
-          {status && (
-            <p className={`text-center font-medium ${status.ok ? 'text-green-600' : 'text-red-600'}`} role="status">{status.text}</p>
-          )}
-          <div className="text-center">
-            <button type="submit" disabled={busy} className="bg-brand hover:bg-brand-dark text-white px-8 py-2.5 rounded-full font-semibold transition disabled:opacity-60">
-              {busy ? 'Sending…' : 'Submit'}
-            </button>
-          </div>
-        </form>
+        {!user ? (
+          <>
+            {status && <p className="text-center font-medium text-red-600 mb-4" role="status">{status.text}</p>}
+            <LoginRequired
+              title="Log in to leave feedback"
+              message="Feedback is for registered readers, so we know who to thank. Log in or create a free account to continue."
+            />
+          </>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-5 text-left">
+            <p className="text-sm text-gray-600">
+              Sending as <span className="font-semibold text-brand">{user.name}</span>
+              {user.email ? <span className="text-gray-400"> ({user.email})</span> : null}
+            </p>
+            <div className="flex items-center gap-4">
+              <span className="text-gray-700">Rating:</span>
+              <StarPicker value={form.stars} onChange={(n) => setForm({ ...form, stars: n })} size="text-2xl" />
+            </div>
+            <textarea className={`${field} h-32 resize-none`} placeholder="Write a comment" aria-label="Comment" required maxLength={2000}
+              value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })} />
+            {status && (
+              <p className={`text-center font-medium ${status.ok ? 'text-green-600' : 'text-red-600'}`} role="status">{status.text}</p>
+            )}
+            <div className="text-center">
+              <button type="submit" disabled={busy} className="bg-brand hover:bg-brand-dark text-white px-8 py-2.5 rounded-full font-semibold transition disabled:opacity-60">
+                {busy ? 'Sending…' : 'Submit'}
+              </button>
+            </div>
+          </form>
+        )}
       </section>
     </div>
   );

@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { useParams, useSearchParams, Navigate } from 'react-router-dom';
+import { Search, ArrowUpDown } from 'lucide-react';
 import { api } from '../api';
 import { GENRES } from '../config';
 import BookCard from './BookCard';
+import { DEFAULT_SORT, SORT_OPTIONS, isValidSort, sortBooks } from '../utils/sortBooks';
 
 const ExplorePage = () => {
   const { slug } = useParams();
@@ -12,6 +13,14 @@ const ExplorePage = () => {
   const [status, setStatus] = useState('loading'); // loading | ready | error
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
+  const [params, setParams] = useSearchParams();
+  const sort = isValidSort(params.get('sort')) ? params.get('sort') : DEFAULT_SORT;
+
+  const changeSort = (value) => {
+    const next = new URLSearchParams(params);
+    if (value === DEFAULT_SORT) next.delete('sort'); else next.set('sort', value);
+    setParams(next, { replace: true });
+  };
 
   useEffect(() => {
     if (!current) return;
@@ -26,9 +35,11 @@ const ExplorePage = () => {
 
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return books;
-    return books.filter((b) => b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
-  }, [books, query]);
+    const matches = q
+      ? books.filter((b) => b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q))
+      : books;
+    return sortBooks(matches, sort);
+  }, [books, query, sort]);
 
   if (!current) return <Navigate to="/explore/all" replace />;
 
@@ -38,17 +49,32 @@ const ExplorePage = () => {
         <h1 className="text-3xl font-bold text-left font-display text-ink">
           {current.label} <span className="text-brand">Books</span>
         </h1>
-        <label className="relative block w-full sm:w-72">
-          <span className="sr-only">Search books</span>
-          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search title or author…"
-            className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand"
-          />
-        </label>
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <label className="relative block w-full sm:w-72">
+            <span className="sr-only">Search books</span>
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search title or author…"
+              className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand"
+            />
+          </label>
+          <label className="relative block w-full sm:w-48">
+            <span className="sr-only">Sort books</span>
+            <ArrowUpDown size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            <select
+              value={sort}
+              onChange={(e) => changeSort(e.target.value)}
+              className="w-full appearance-none pl-9 pr-4 py-2 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand cursor-pointer"
+            >
+              {SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </label>
+        </div>
       </div>
 
       {status === 'loading' && (

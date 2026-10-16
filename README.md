@@ -20,6 +20,11 @@ Set `VITE_API_URL` (see `.env.example`) if the backend is not on `http://localho
 ## Deploy
 See [DEPLOY.md](DEPLOY.md) for Railway (API + MySQL) and Vercel (frontend).
 
+## Data engineering (analytics warehouse)
+`data-engineering/` contains an independent Python ETL pipeline that loads books and reviews from MySQL into a
+PostgreSQL star-schema warehouse (incremental, idempotent, with data-quality quarantine). The website does not
+depend on it. See [data-engineering/README.md](data-engineering/README.md).
+
 ## Features
 Browse/search books by genre, read and write reviews (average ratings shown on cards),
 register/login (JWT, "remember me"), contact/feedback form, legal pages.

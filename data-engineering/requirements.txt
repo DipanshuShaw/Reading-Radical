@@ -1,0 +1,4 @@
+SQLAlchemy>=2.0,<3
+PyMySQL>=1.1,<2          # MySQL source driver (pure Python)
+psycopg[binary]>=3.1,<4  # PostgreSQL warehouse driver
+python-dotenv>=1.0,<2

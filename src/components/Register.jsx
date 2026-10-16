@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { AuthContext } from '../context/AuthContext';
 import registerImage from '../Images/reviewers-sec2-pic.jpg';
@@ -9,6 +9,7 @@ const input = 'w-full px-4 py-2.5 rounded-lg bg-amber-50 text-black border borde
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useContext(AuthContext);
   const [form, setForm] = useState({ email: '', name: '', password: '', is_reviewer: false });
   const [agree, setAgree] = useState(false);
@@ -25,7 +26,7 @@ const Register = () => {
     try {
       const data = await api('/api/users/register', { method: 'POST', body: form });
       login(data, true);
-      navigate('/home', { replace: true });
+      navigate(location.state?.from || '/home', { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -66,7 +67,7 @@ const Register = () => {
           {busy ? 'Creating account…' : 'Register'}
         </button>
         <p className="text-center text-sm">
-          Already have an account? <Link to="/login" className="text-sky-300 hover:underline">Log in</Link>
+          Already have an account? <Link to="/login" state={location.state} className="text-sky-300 hover:underline">Log in</Link>
         </p>
       </form>
     </AuthShell>

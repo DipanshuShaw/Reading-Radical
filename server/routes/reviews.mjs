@@ -1,18 +1,23 @@
 import express from 'express';
 import db from '../db.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// POST /api/reviews  { book_id, reviewer, comment, rating }
-router.post('/', async (req, res) => {
+// POST /api/reviews  { book_id, comment, rating }   (requires login)
+// The reviewer name and user id come from the verified token, so nobody can post as someone else.
+router.post('/', requireAuth, async (req, res) => {
   const bookId = Number(req.body.book_id);
-  const reviewer = String(req.body.reviewer || '').trim();
   const comment = String(req.body.comment || '').trim();
   const rating = Number(req.body.rating);
+  const reviewer = String(req.user.name || '').trim();
+  const userId = Number(req.user.userId);
 
   if (!Number.isInteger(bookId)) return res.status(400).json({ error: 'A valid book is required.' });
-  if (!reviewer || !comment) return res.status(400).json({ error: 'Name and review text are required.' });
-  if (reviewer.length > 100) return res.status(400).json({ error: 'Name is too long (max 100 characters).' });
+  if (!comment) return res.status(400).json({ error: 'Review text is required.' });
+  if (!reviewer || !Number.isInteger(userId)) {
+    return res.status(401).json({ error: 'Please log in again.' });
+  }
   if (comment.length > 2000) return res.status(400).json({ error: 'Review is too long (max 2000 characters).' });
   if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
     return res.status(400).json({ error: 'Rating must be between 1 and 5.' });
@@ -23,8 +28,8 @@ router.post('/', async (req, res) => {
     if (!book.length) return res.status(404).json({ error: 'Book not found.' });
 
     const [result] = await db.query(
-      'INSERT INTO reviews (book_id, reviewer, comment, rating) VALUES (?, ?, ?, ?)',
-      [bookId, reviewer, comment, rating]
+      'INSERT INTO reviews (book_id, user_id, reviewer, comment, rating) VALUES (?, ?, ?, ?, ?)',
+      [bookId, userId, reviewer, comment, rating]
     );
     res.status(201).json({ message: 'Review submitted successfully', reviewId: result.insertId });
   } catch (err) {

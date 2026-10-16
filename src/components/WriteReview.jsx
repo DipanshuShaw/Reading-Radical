@@ -3,22 +3,19 @@ import { Link, useParams } from 'react-router-dom';
 import { api } from '../api';
 import { AuthContext } from '../context/AuthContext';
 import BookDetail from './BookDetail';
+import LoginRequired from './LoginRequired';
 import StarPicker from './StarPicker';
 
 const WriteReview = () => {
   const { id } = useParams();
-  const { user, token } = useContext(AuthContext);
+  const { user, token, logout } = useContext(AuthContext);
   const [book, setBook] = useState(null);
   const [loadError, setLoadError] = useState('');
-  const [reviewer, setReviewer] = useState('');
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(5);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
-
-  // Pre-fill name for logged-in users.
-  useEffect(() => { if (user?.name) setReviewer(user.name); }, [user]);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,12 +30,18 @@ const WriteReview = () => {
     setBusy(true);
     setError('');
     try {
-      await api('/api/reviews', { method: 'POST', token, body: { book_id: Number(id), reviewer, comment, rating } });
+      // The server takes the reviewer's name from the login token, so only book, rating and text are sent.
+      await api('/api/reviews', { method: 'POST', token, body: { book_id: Number(id), comment, rating } });
       setDone(true);
       setComment('');
       setRating(5);
     } catch (err) {
-      setError(err.message);
+      if (err.status === 401) {
+        logout(); // expired or invalid session -> the page switches to the login prompt
+        setError('Your session expired. Please log in again.');
+      } else {
+        setError(err.message);
+      }
     } finally {
       setBusy(false);
     }
@@ -55,7 +58,15 @@ const WriteReview = () => {
         Write a Review
       </h2>
 
-      {done ? (
+      {!user ? (
+        <>
+          {error && <p className="text-center text-red-600 mb-4" role="alert">{error}</p>}
+          <LoginRequired
+            title="Log in to write a review"
+            message="Only registered readers can post reviews. It's free and takes less than a minute."
+          />
+        </>
+      ) : done ? (
         <div className="max-w-xl mx-auto bg-green-50 border border-green-200 rounded-2xl p-8 text-center" role="status">
           <p className="text-xl font-semibold text-green-800">Thanks — your review is live!</p>
           <div className="mt-5 flex justify-center gap-3">
@@ -69,11 +80,9 @@ const WriteReview = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white rounded-2xl shadow-sm p-6 text-left space-y-5">
-          <div>
-            <label htmlFor="reviewer" className="block text-sm font-medium text-gray-700 mb-1">Your name</label>
-            <input id="reviewer" className={field} value={reviewer} maxLength={100} required
-              onChange={(e) => setReviewer(e.target.value)} placeholder="Jane Doe" />
-          </div>
+          <p className="text-sm text-gray-600">
+            Reviewing as <span className="font-semibold text-brand">{user.name}</span>
+          </p>
           <div>
             <span className="block text-sm font-medium text-gray-700 mb-1">Your rating</span>
             <StarPicker value={rating} onChange={setRating} />

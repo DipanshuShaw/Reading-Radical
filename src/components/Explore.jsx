@@ -1,7 +1,9 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { GENRES } from '../config';
 
-const Explore = () => (
+const Explore = () => {
+  const { search } = useLocation(); // keeps ?sort=... when switching genre
+  return (
   <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
     <aside className="md:w-56 shrink-0">
       <h2 className="text-lg font-bold mb-3 text-brand text-left">Genres</h2>
@@ -10,7 +12,7 @@ const Explore = () => (
           {GENRES.map((g) => (
             <li key={g.slug} className="shrink-0">
               <NavLink
-                to={`/explore/${g.slug}`}
+                to={{ pathname: `/explore/${g.slug}`, search }}
                 className={({ isActive }) =>
                   `block px-4 py-2 text-sm font-semibold rounded-full md:rounded-lg no-underline text-left transition-colors ${
                     isActive ? 'bg-brand text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
@@ -28,6 +30,7 @@ const Explore = () => (
       <Outlet />
     </div>
   </div>
-);
+  );
+};
 
 export default Explore;
